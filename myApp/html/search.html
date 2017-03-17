@@ -2,18 +2,11 @@
 
 <html>
   <head>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
-    <script>
-      var app = angular.module('myApp',[]);
 
-      app.controller('searchCtrl', function($scope){
-        $scope.results = [
-          {src: 'http://www.101dogbreeds.com/wp-content/uploads/2015/01/Nova-Scotia-Duck-Tolling-Retriever-Black-Nose.jpg', alt: 'metadataDog'},
-          {src: 'http://kids.nationalgeographic.com/content/dam/kids/photos/animals/Birds/H-P/mallard-male-standing.jpg.adapt.945.1.jpg', alt: 'metadataDog'}
-        ];
-        //$scope.result = {src: 'http://www.101dogbreeds.com/wp-content/uploads/2015/01/Nova-Scotia-Duck-Tolling-Retriever-Black-Nose.jpg', alt: 'tool text'};
-      });
-    </script>
+    <script type="text/javascript" src="/js/searchscript.js"></script>
+
 
   </head>
 
@@ -22,9 +15,8 @@
 
     </div>
     <div class="searchArea">
-      <form method="post">
-
-        <input type="text" name="seach_field" ng-model="search_field" placeholder="Type in searchword here..."><input type="submit" value="Search">Machine learning on/off: <input type="checkbox" value="Machine Learning on/off">
+      <form>
+        <input type="text" name="search_field" placeholder="Type in searchword here..."><input name="search_button" type="submit" value="Search">Machine learning on/off: <input type="checkbox">
       </form>
     </div>
     <div class="resultArea" ng-controller="searchCtrl">
@@ -37,6 +29,26 @@
 
     <div class="footer">
     </div>
+
+
+    <script type="text/javascript">
+      function getScope(ctrlName) {
+        var sel = 'div[ng-controller="' + ctrlName + '"]';
+        return angular.element(sel).scope();
+      };
+      $("[name='search_button']").click(changeImg);
+      function changeImg(){
+        var $scope = getScope('searchCtrl');
+        $scope.results = [
+          {src: 'http://www.101dogbreeds.com/wp-content/uploads/2015/01/Nova-Scotia-Duck-Tolling-Retriever-Black-Nose.jpg', alt: 'metadataDog'},
+          {src: 'http://kids.nationalgeographic.com/content/dam/kids/photos/animals/Birds/H-P/mallard-male-standing.jpg.adapt.945.1.jpg', alt: 'metadataDuck'}
+        ];
+        $scope.$apply();
+      };
+      /*jQuery(document).ready(function($) {
+        setTimeout(changeImg, 3000);
+      });*/
+    </script>
 
 
 

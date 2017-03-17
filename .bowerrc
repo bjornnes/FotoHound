@@ -1,4 +1,4 @@
 {
-  "directory": "myApp/components/",
+  "directory": "myApp/client/components/",
   "timeout": 120000
 }

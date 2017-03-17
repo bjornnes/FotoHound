@@ -5,11 +5,6 @@ var angular = require('angular');
 
 var app = angular.module('myApp',[]);
 
-/*app.config(['$routeProvider', function ($routeProvider){
-  $routeProvider
-  //Home
-  .when("/", {templateUrl: "partials/todo.tlp.html", controller: "main"})
-}]);*/
 
 
 app.directive('myTodo', function(){

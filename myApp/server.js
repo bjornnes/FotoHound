@@ -17,7 +17,7 @@ var credentials = {
     passphrase: '1234'
 };
 
-//app.use(express.static(__dirname + "/../client"));
+app.use(express.static("client"));
 
 var https_server = https.createServer(credentials, app);
 
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 //app.all('/oauth/token', app.oauth.grant());
 
-app.get('/', function (req, res) {
+app.get('/*', function (req, res) {
  /*if (req.session.access_token == null)
  {
      res.send("access token is null");
@@ -40,14 +40,16 @@ app.get('/', function (req, res) {
  });
   res.send('Secret area');*/
   //res.json({test: 'successful'});
-  res.sendFile(__dirname+'/html/search.html')
+  res.sendFile(__dirname+'/html/search.html');
   console.log('connection');
 });
 
-app.post('/*', function(req, res){
+app.post('/search', function(req, res){
   console.log('searching');
   var searchWord = req.body.search_field;
   console.log(searchWord);
+  console.log(req.body.results);
+  res.sendFile(__dirname+'/html/search.html');
 });
 
 var server=https_server.listen(PORT, () => {
