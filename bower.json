@@ -1,0 +1,21 @@
+{
+  "name": "Server",
+  "homepage": "https://github.com/bjornnes/school",
+  "authors": [
+    "bjornnes <steinerikbjornnes@gmail.com>"
+  ],
+  "description": "Server for bachelor project",
+  "main": "dunno",
+  "keywords": [
+    "asd"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

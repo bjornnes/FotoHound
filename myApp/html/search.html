@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <script data-require="angular.js@1.5.0" data-semver="1.5.0" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.js"></script>
+    
+  </head>
+
+  <body ng-app="myApp">
+    <div class="header">
+
+    </div>
+    <div class="searchArea">
+      <form method="post">
+
+        <input type="text" ng-model="search_field" placeholder="Type in searchword here..."><input type="submit" value="Search">Machine learning on/off: <input type="checkbox" value="Machine Learning on/off">
+      </form>
+    </div>
+    <div class="resultArea" ng-controller="searchCtrl">
+      <img data-ng-bind="result">
+    </div>
+
+    <div class="footer">
+    </div>
+
+
+
+  </body>
+
+</html>

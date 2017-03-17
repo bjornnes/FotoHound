@@ -1,0 +1,18 @@
+{
+  "name": "Server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Stein-Erik Bjørnnes",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "fs": "^0.0.1-security",
+    "https": "^1.0.0"
+  }
+}
