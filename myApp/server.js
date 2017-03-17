@@ -10,7 +10,7 @@ var bodyParser = require('body-parser');
 var hskey = fs.readFileSync(__dirname+'/sslcert/server.key');
 var hscert = fs.readFileSync(__dirname+'/sslcert/server.cert');
 
-var app = express();
+var app = module.exports = express();
 var credentials = {
     key: hskey,
     cert: hscert,
@@ -27,7 +27,7 @@ app.use(bodyParser.json());
 
 //app.all('/oauth/token', app.oauth.grant());
 
-app.get('/*', function (req, res) {
+app.get('/', function (req, res) {
  /*if (req.session.access_token == null)
  {
      res.send("access token is null");
