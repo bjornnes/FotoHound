@@ -7,6 +7,8 @@
 
     <script type="text/javascript" src="/js/searchscript.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="/css/search.css"></link>
+
 
   </head>
 
@@ -15,16 +17,16 @@
 
     </div>
     <div class="searchArea">
-      <form>
-        <input type="text" name="search_field" placeholder="Type in searchword here..."><input name="search_button" type="submit" value="Search">Machine learning on/off: <input type="checkbox">
+      <form> <! action="search" method="get">
+        <input type="text" name="q" placeholder="Type in searchword here..."><input name="search_button" type="submit" value="Search">Machine learning on/off: <input type="checkbox">
       </form>
     </div>
     <div class="resultArea" ng-controller="searchCtrl">
-      <ul>
-        <li ng-repeat="index in results">
-          <img src="{{index.src}}" alt="{{index.alt}}">
-        </li>
-      </ul>
+      <a class="aImg" ng-repeat="element in results" href="{{element.src}}">
+        <figure>
+          <img src="{{element.src}}" alt="{{element.alt}}">
+        </figure>
+      </a>
     </div>
 
     <div class="footer">
@@ -36,13 +38,12 @@
         var sel = 'div[ng-controller="' + ctrlName + '"]';
         return angular.element(sel).scope();
       };
-      $("[name='search_button']").click(changeImg);
-      function changeImg(){
+      $("[name='search_button']").click(updateRes);
+      function updateRes(){
         var $scope = getScope('searchCtrl');
-        $scope.results = [
-          {src: 'http://www.101dogbreeds.com/wp-content/uploads/2015/01/Nova-Scotia-Duck-Tolling-Retriever-Black-Nose.jpg', alt: 'metadataDog'},
+        $scope.results.push(
           {src: 'http://kids.nationalgeographic.com/content/dam/kids/photos/animals/Birds/H-P/mallard-male-standing.jpg.adapt.945.1.jpg', alt: 'metadataDuck'}
-        ];
+        );
         $scope.$apply();
       };
       /*jQuery(document).ready(function($) {

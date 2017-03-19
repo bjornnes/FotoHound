@@ -44,7 +44,7 @@ app.get('/*', function (req, res) {
   console.log('connection');
 });
 
-app.post('/search', function(req, res){
+app.get('/search', function(req, res){
   console.log('searching');
   var searchWord = req.body.search_field;
   console.log(searchWord);
