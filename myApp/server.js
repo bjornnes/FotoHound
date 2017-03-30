@@ -6,6 +6,7 @@ var fs = require('fs');
 var https = require('https');
 var express = require('express');
 var bodyParser = require('body-parser');
+var pythonShell = require('python-shell');
 
 var hskey = fs.readFileSync(__dirname+'/sslcert/server.key');
 var hscert = fs.readFileSync(__dirname+'/sslcert/server.cert');
@@ -16,6 +17,19 @@ var credentials = {
     cert: hscert,
     passphrase: '1234'
 };
+
+var pythonOptions = {
+  mode: 'json',
+  scriptPath: 'pythonScripts'
+};
+
+pythonShell.defaultOptions = pythonOptions;
+
+var word2vec = new pythonShell('word2vec.py', pythonOptions);
+//word2vec.send({command: 'most_similar', args: 'man'});
+/*word2vec.receive('data', function(data){
+  console.log('data: '+data);
+});*/
 
 app.use(express.static("client"));
 
