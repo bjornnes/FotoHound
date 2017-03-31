@@ -10,14 +10,28 @@ var bodyParser = require('body-parser');
 var hskey = fs.readFileSync(__dirname+'/sslcert/server.key');
 var hscert = fs.readFileSync(__dirname+'/sslcert/server.cert');
 
-var app = module.exports = express();
+var mysql = require('mysql');
+var connection = require("express-myconnection");
+
+var app = express();
 var credentials = {
     key: hskey,
     cert: hscert,
     passphrase: '1234'
 };
 
-app.use(express.static("client"));
+var DataHandler = require('./handlers/DataHandler.js');
+var routes = require('./routes.js');
+
+app.use(bodyParser.json());
+
+var handlers = {
+  data: new DataHandler()
+};
+
+
+routes.setup(app, handlers);
+//app.use(express.static(__dirname + "/../client"));
 
 var https_server = https.createServer(credentials, app);
 
@@ -40,16 +54,14 @@ app.get('/*', function (req, res) {
  });
   res.send('Secret area');*/
   //res.json({test: 'successful'});
-  res.sendFile(__dirname+'/html/search.html');
+  res.sendFile(__dirname+'/html/search.html')
   console.log('connection');
 });
 
-app.get('/search', function(req, res){
+app.post('/*', function(req, res){
   console.log('searching');
   var searchWord = req.body.search_field;
   console.log(searchWord);
-  console.log(req.body.results);
-  res.sendFile(__dirname+'/html/search.html');
 });
 
 var server=https_server.listen(PORT, () => {
