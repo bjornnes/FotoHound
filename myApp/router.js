@@ -13,6 +13,10 @@ function setup(app, handlers) {
       next();
     }
   });
+  //Studies
+  app.get('/data/', handlers.data.data);
 
-  //data
-  app.get('/data/', handlers.data);
+
+}
+
+exports.setup = setup;
