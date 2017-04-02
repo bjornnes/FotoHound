@@ -1,0 +1,13 @@
+<form class="well">
+  <div class="form-group">
+    <input type="text" #searchQuery placeholder="Type in searchword here..." class="form-control"><button (click)="search(searchQuery.value, machineLearning.checked)">Search</button>Machine learning on/off: <input type="checkbox" #machineLearning>
+  </div>
+</form>
+<hr>
+<div class="resultArea">
+  <a class="aImg" *ngFor="let element of result" href="{{element.src}}">
+    <figure>
+      <img src="{{element.src}}" alt="{{element.alt}}">
+    </figure>
+  </a>
+</div>
