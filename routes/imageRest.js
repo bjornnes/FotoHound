@@ -13,9 +13,10 @@ function setup(app, handlers) {
       next();
     }
   });
+
   //Studies
   app.get('/data', handlers.dataHandler.data);
-
+  app.get('/data/:name', handlers.dataHandler.size)
 
 }
 
