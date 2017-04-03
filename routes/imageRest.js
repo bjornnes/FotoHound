@@ -14,7 +14,7 @@ function setup(app, handlers) {
     }
   });
 
-  //Studies
+  //getters
   app.get('/data', handlers.dataHandler.data);
   app.get('/data/:name', handlers.dataHandler.size)
 
