@@ -4,6 +4,8 @@ const PORT=8080;
 
 var fs = require('fs');
 var https = require('https');
+var http = require('https');
+
 var express = require('express');
 var bodyParser = require('body-parser');
 var pythonShell = require('python-shell');
@@ -45,8 +47,12 @@ var credentials = {
     passphrase: '1234'
 };
 
+//HTTPS SERVER
 var https_server = https.createServer(credentials, app);
 
+//HTTPSERVER
+// var httpServer= http.createServer(app);
+// httpServer.listen(8080);
 
 //Python interface
 /*var pythonOptions = {
