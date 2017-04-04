@@ -52,21 +52,45 @@ var credentials = {
 
 //HTTPSERVER
 var httpServer= http.createServer(app);
-httpServer.listen(8080);
+httpServer.listen(8081);
 
 //Python interface
-/*var pythonOptions = {
+var pythonOptions = {
   mode: 'json',
   scriptPath: 'pythonScripts'
 };
+
+// var options = {
+//   mode: 'json',
+//   scriptPath: 'pythonScripts',
+//   args: 'man'
+// };
 
 pythonShell.defaultOptions = pythonOptions;
 
 var word2vec = new pythonShell('word2vec.py', pythonOptions);
 //word2vec.send({command: 'most_similar', args: 'man'});
-/*word2vec.receive('data', function(data){
+
+// pythonShell.run('word2vec.py', options, function (err, results) {
+//   if (err) throw err;
+//   // results is an array consisting of messages collected during execution
+//   console.log('results: %j', results);
+// });
+
+try{
+  word2vec.send({command: 'most_similar', args: 'man'}).end(function(){
+    console.log('sent');
+  });
+}catch (err){
+
+}
+word2vec.receive('data', function(data){
   console.log('data: '+data);
-});*/
+});
+
+
+
+
 
 
 //Set URL-routes
