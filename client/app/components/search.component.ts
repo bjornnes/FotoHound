@@ -5,8 +5,8 @@ import {SearchService} from '../services/search.service';
 
 @Component({
   selector: 'search',
-  templateUrl: 'app/html/search.html',
-  providers: [SearchService]
+  templateUrl: 'app/html/search.html'
+  //providers: [SearchService]
 })
 export class SearchComponent{
   searchField;
@@ -20,8 +20,12 @@ export class SearchComponent{
   }
 
   search(search: string, machineLearning: boolean){
+    console.log(search, machineLearning);
     this.searchService.search(search, machineLearning).subscribe(results => {
-      this.result = results;
+      console.log(results);
+      //this.result = results;
+    }, error => {
+      console.log(error);
     });
 
     //this.result = this.searchService.search(search, machineLearning);
