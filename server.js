@@ -4,7 +4,7 @@ const PORT=8080;
 
 var fs = require('fs');
 var https = require('https');
-var http = require('https');
+var http = require('http');
 
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -48,11 +48,11 @@ var credentials = {
 };
 
 //HTTPS SERVER
-var https_server = https.createServer(credentials, app);
+//var https_server = https.createServer(credentials, app);
 
 //HTTPSERVER
-// var httpServer= http.createServer(app);
-// httpServer.listen(8080);
+var httpServer= http.createServer(app);
+httpServer.listen(8080);
 
 //Python interface
 /*var pythonOptions = {
@@ -100,8 +100,8 @@ imageRest.setup(app, handlers);
   res.sendFile(__dirname+'/html/search.html');
 });*/
 
-var server=https_server.listen(PORT, () => {
-    var host = server.address().address;
-    var port = server.address().port;
-    console.log('Example app listening at https://localhost:%s', port);
-});
+// var server=https_server.listen(PORT, () => {
+//     var host = server.address().address;
+//     var port = server.address().port;
+//     console.log('Example app listening at https://localhost:%s', port);
+// });

@@ -1,5 +1,6 @@
 //SQL SETNINGER
 var mysql = require('promise-mysql');
+var SearchClass = require('../routes/search');
 
 var pool = mysql.createPool({
   //Proterties...
@@ -15,6 +16,14 @@ var DataHandler = function() {
    this.insert = insertData;
 };
 
+var search = new SearchClass();
+exports.search = search;
+
+function findImagesFromWord(req, res){
+
+}
+
+//Getting all data
 function getAllData(req, res){
   var sql = "select * from data";
 
@@ -76,6 +85,7 @@ function getSize(req,res){
   )
 };
 
+// Inserting data to DB
 function insertData(req,res){
   var name=req.body.name;
   var text = req.body.text;
