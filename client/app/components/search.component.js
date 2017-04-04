@@ -29,9 +29,12 @@ System.register(["angular2/core", "../services/search.service"], function (expor
                     this.result = [];
                 }
                 SearchComponent.prototype.search = function (search, machineLearning) {
-                    var _this = this;
+                    console.log(search, machineLearning);
                     this.searchService.search(search, machineLearning).subscribe(function (results) {
-                        _this.result = results;
+                        console.log(results);
+                        //this.result = results;
+                    }, function (error) {
+                        console.log(error);
                     });
                     //this.result = this.searchService.search(search, machineLearning);
                 };
@@ -40,8 +43,8 @@ System.register(["angular2/core", "../services/search.service"], function (expor
             SearchComponent = __decorate([
                 core_1.Component({
                     selector: 'search',
-                    templateUrl: 'app/html/search.html',
-                    providers: [search_service_1.SearchService]
+                    templateUrl: 'app/html/search.html'
+                    //providers: [SearchService]
                 }),
                 __metadata("design:paramtypes", [search_service_1.SearchService])
             ], SearchComponent);
