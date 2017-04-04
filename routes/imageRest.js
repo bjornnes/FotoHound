@@ -16,7 +16,8 @@ function setup(app, handlers) {
 
   //getters
   app.get('/data', handlers.dataHandler.data);
-  app.get('/data/:name', handlers.dataHandler.size)
+  app.get('/data/:name', handlers.dataHandler.size);
+  app.post('/data/', handlers.dataHandler.insert);
 
 }
 
