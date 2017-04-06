@@ -32,7 +32,8 @@ System.register(["angular2/core", "./search.component", "../services/search.serv
             AppComponent = __decorate([
                 core_1.Component({
                     selector: 'my-app',
-                    template: "<h1>SLSE</h1>\n    <search></search>",
+                    templateUrl: 'app/html/header.html',
+                    template: '<search></search>',
                     directives: [search_component_1.SearchComponent],
                     providers: [search_service_1.SearchService, http_1.HTTP_PROVIDERS]
                 })

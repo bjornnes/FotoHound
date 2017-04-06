@@ -5,8 +5,8 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 
 @Component({
     selector: 'my-app',
-    template: `<h1>SLSE</h1>
-    <search></search>`,
+    templateUrl: 'app/html/header.html',
+    template: '<search></search>',
     directives: [SearchComponent],
     providers:[SearchService, HTTP_PROVIDERS]
 })
