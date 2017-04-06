@@ -1,10 +1,14 @@
 var express = require('express');
 var router = module.exports =  express.Router();
+var server = require('../server');
 
 router.get('/', function(req, res, next){
+  server.notify('searchquery', ''+req.query.searchQuery);
+  server.notify('machinelearning', ''+req.query.machineLearning);
   var result;
-  var machineLearning = req.parameter.machineLearning;
-  if(machineLearning){
+  var searchQuery = req.query.searchQuery;
+  var machineLearning = req.query.machineLearning;
+  if(machineLearning === 'true'){
     result = [
     {src: 'http://www.101dogbreeds.com/wp-content/uploads/2015/01/Nova-Scotia-Duck-Tolling-Retriever-Black-Nose.jpg', alt: 'metadataDog'},
     {src: 'http://platowebdesign.com/articles/wp-content/uploads/2014/10/public-domain-images-free-stock-photos-light-sky-silo-windows-lillyphotographer-1024x684.jpg', alt: 'sylinder'},

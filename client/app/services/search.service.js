@@ -26,9 +26,19 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
             SearchService = (function () {
                 function SearchService(http) {
                     this.http = http;
+                    this.params = new http_1.URLSearchParams();
                 }
                 SearchService.prototype.search = function (search, machineLearning) {
-                    return this.http.get('https://localhost:3000/search/').map(function (res) { res.json(); });
+                    this.params.set('searchQuery', search);
+                    this.params.set('machineLearning', machineLearning);
+                    return this.http.get('search/', {
+                        search: this.params
+                    }).map(function (res) {
+                        res.json();
+                        //var jsonObj = res.json();
+                        //this.result = jsonObj;
+                    });
+                    //return this.result;
                 };
                 return SearchService;
             }());

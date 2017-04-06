@@ -16,8 +16,8 @@ var DataHandler = function() {
    this.insert = insertData;
 };
 
-var search = new SearchClass();
-exports.search = search;
+// var search = new SearchClass();
+// exports.search = search;
 
 function findImagesFromWord(req, res){
 

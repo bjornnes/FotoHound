@@ -17,18 +17,18 @@ export class SearchComponent{
     this.searchField = "";
     this.machineLearning = false;
     this.result = [];
+    this.searchService.search('',false).subscribe(results => console.log());
   }
 
   search(search: string, machineLearning: boolean){
     console.log(search, machineLearning);
     this.searchService.search(search, machineLearning).subscribe(results => {
       console.log(results);
-      //this.result = results;
+      this.result = results;
     }, error => {
       console.log(error);
     });
-
-    //this.result = this.searchService.search(search, machineLearning);
+    console.log(this.searchService.search(search, machineLearning));
   }
 }
 

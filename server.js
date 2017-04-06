@@ -48,11 +48,11 @@ var credentials = {
 };
 
 //HTTPS SERVER
-//var https_server = https.createServer(credentials, app);
+var https_server = https.createServer(credentials, app);
 
 //HTTPSERVER
-var httpServer= http.createServer(app);
-httpServer.listen(8080);
+// var httpServer= http.createServer(app);
+// httpServer.listen(8080);
 
 //Python interface
 /*var pythonOptions = {
@@ -100,8 +100,20 @@ imageRest.setup(app, handlers);
   res.sendFile(__dirname+'/html/search.html');
 });*/
 
-// var server=https_server.listen(PORT, () => {
-//     var host = server.address().address;
-//     var port = server.address().port;
-//     console.log('Example app listening at https://localhost:%s', port);
-// });
+var server=https_server.listen(PORT, () => {
+    var host = server.address().address;
+    var port = server.address().port;
+    console.log('Example app listening at https://localhost:%s', port);
+});
+
+// DEVELOPMENT
+const notifier = require('node-notifier');
+
+function notify(title, message){
+  notifier.notify({
+    'title': ''+title,
+    'message': ''+message
+  });
+};
+
+exports.notify = notify;
