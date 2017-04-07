@@ -1,38 +1,17 @@
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#">Logo</a>
-      </div>
-      <div class="collapse navbar-collapse" id="myNavbar">
-        <ul class="nav navbar-nav">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Projects</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-        </ul>
-      </div>
-    </div>
-</nav>
 <form class="well">
-  <div class="form-group">
-    <input type="text" #searchQuery placeholder="Type in searchword here..." class="form-control">
-    <button (click)="search(searchQuery.value, machineLearning.checked)">Search</button>
-    Machine learning on/off: <input type="checkbox" #machineLearning>
-  </div>
+    <div class="form-group">
+        <input type="text" #searchQuery placeholder="Type in searchword here..." class="form-control">
+        <button class="btn btn-block" (click)="search(searchQuery.value, machineLearning.checked)">Search</button>
+        <div class="chechbox">
+            <label><input type="checkbox" #machineLearning value=""> Machine learning on/off</label>
+        </div>
+    </div>
 </form>
 <hr>
 <div class="resultArea">
-  <a class="aImg" *ngFor="let element of result" href="{{element.src}}">
-    <figure>
-      <img src="{{element.src}}" alt="{{element.alt}}">
-    </figure>
-  </a>
+    <a class="aImg" *ngFor="let element of result" href="{{element.src}}">
+        <figure>
+            <img src="{{element.src}}" alt="{{element.alt}}">
+        </figure>
+    </a>
 </div>

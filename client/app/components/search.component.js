@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../services/search.service", "rxjs/Observable"], function (exports_1, context_1) {
+System.register(["angular2/core", "../services/search.service"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["angular2/core", "../services/search.service", "rxjs/Observable
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, search_service_1, Observable_1, SearchComponent;
+    var core_1, search_service_1, SearchComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -18,40 +18,22 @@ System.register(["angular2/core", "../services/search.service", "rxjs/Observable
             },
             function (search_service_1_1) {
                 search_service_1 = search_service_1_1;
-            },
-            function (Observable_1_1) {
-                Observable_1 = Observable_1_1;
             }
         ],
         execute: function () {
             SearchComponent = (function () {
                 function SearchComponent(searchService) {
-                    var _this = this;
                     this.searchService = searchService;
                     this.searchField = "";
                     this.machineLearning = false;
-                    this.obResult = new Observable_1.Observable(function (observer) {
-                        setTimeout(function () {
-                            observer.next(42);
-                        }, 1000);
-                        setTimeout(function () {
-                            observer.next(43);
-                        }, 2000);
-                        setTimeout(function () {
-                            observer.complete();
-                        });
-                    });
-                    var subsciption = this.obResult.subscribe(function (value) { return _this.result.push(value); }, function (error) { return console.log(error); });
                 }
+                SearchComponent.prototype.ngOnInit = function () {
+                    //this.searchService.search('',false).subscribe(searchRes => this.result = searchRes);
+                };
                 SearchComponent.prototype.search = function (search, machineLearning) {
                     var _this = this;
                     console.log(search, machineLearning);
-                    this.searchService.search(search, machineLearning).subscribe(function (obResults) {
-                        _this.obResult = obResults;
-                    }, function (error) {
-                        console.log(error);
-                    });
-                    console.log(this.searchService.search(search, machineLearning));
+                    this.searchService.search(search, machineLearning).subscribe(function (searchRes) { return _this.result = searchRes; });
                 };
                 return SearchComponent;
             }());

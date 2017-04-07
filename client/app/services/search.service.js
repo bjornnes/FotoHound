@@ -33,12 +33,7 @@ System.register(["angular2/core", "angular2/http", "rxjs/add/operator/map"], fun
                     this.params.set('machineLearning', machineLearning);
                     return this.http.get('search/', {
                         search: this.params
-                    }).map(function (res) {
-                        res.json();
-                        //var jsonObj = res.json();
-                        //this.result = jsonObj;
-                    });
-                    //return this.result;
+                    }).map(function (res) { return res.json(); });
                 };
                 return SearchService;
             }());

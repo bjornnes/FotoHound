@@ -8,7 +8,8 @@ router.get('/', function(req, res, next){
   var result;
   var searchQuery = req.query.searchQuery;
   var machineLearning = req.query.machineLearning;
-  if(machineLearning === 'true'){
+  if(machineLearning == 'true'){
+    server.notify('true?', 'ja');
     result = [
     {src: 'http://www.101dogbreeds.com/wp-content/uploads/2015/01/Nova-Scotia-Duck-Tolling-Retriever-Black-Nose.jpg', alt: 'metadataDog'},
     {src: 'http://platowebdesign.com/articles/wp-content/uploads/2014/10/public-domain-images-free-stock-photos-light-sky-silo-windows-lillyphotographer-1024x684.jpg', alt: 'sylinder'},
@@ -20,6 +21,7 @@ router.get('/', function(req, res, next){
     {src: 'http://www.freewallpaperfullhd.com/wp-content/uploads/2015/03/wallpapers/two_swans-wallpaper-3840x2160.jpg', alt: 'Swans can be gay'}
   ];
   }else{
+    server.notify('true?', 'nei');
     result = [{src: 'http://kids.nationalgeographic.com/content/dam/kids/photos/animals/Birds/H-P/mallard-male-standing.jpg.adapt.945.1.jpg', alt: 'metadataDuck'}];
   }
   res.send(result);

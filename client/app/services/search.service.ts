@@ -14,17 +14,12 @@ export class SearchService{
     this.params = new URLSearchParams();
   }
 
-  search(search: string, machineLearning: boolean): Observable<any>{
+  search(search: string, machineLearning: boolean){
     this.params.set('searchQuery', search);
     this.params.set('machineLearning', machineLearning);
     return this.http.get('search/', {
       search: this.params
-    }).map(res => { res.json()
-      //var jsonObj = res.json();
-      //this.result = jsonObj;
-
-     });
-     //return this.result;
+    }).map(res => res.json());
   }
 
 }
