@@ -49,51 +49,52 @@ var credentials = {
 
 //HTTPS SERVER
 //var https_server = https.createServer(credentials, app);
-
+var word2vecResults = require('./socketTest');
+console.log(word2vecResults);
 //HTTPSERVER
 var httpServer= http.createServer(app);
 httpServer.listen(8081);
 
 //Python interface
-var pythonOptions = {
-  mode: 'json',
-  scriptPath: 'pythonScripts'
-};
-
-var options = {
-  mode: 'json',
-  scriptPath: 'pythonScripts',
-  args: 'man'
-};
-
-pythonShell.defaultOptions = pythonOptions;
-
-var word2vec = new pythonShell('word2vec.py', pythonOptions);
-//word2vec.send({command: 'most_similar', args: 'man'});
-
-pythonShell.run('word2vec.py', options, function (err, results) {
-  if (err) throw err;
-  // results is an array consisting of messages collected during execution
-  console.log('results: %j', results);
-});
-
-try{
-  word2vec.send({command: 'most_similar', args: 'man'}).end(function(){
-    console.log('sent');
-  });
-}catch (err){
-
-}
-
-var pyshell = new pythonShell('echo_json.py', {
-    mode: 'json'
-});
-pyshell.on('message', function (message) {
-    console.log('in ON function');
-}).receive('{"a"').receive(':').receive('true}\n').end(function(){
-  console.log('received');
-
-});
+// var pythonOptions = {
+//   mode: 'json',
+//   scriptPath: 'pythonScripts'
+// };
+//
+// var options = {
+//   mode: 'json',
+//   scriptPath: 'pythonScripts',
+//   args: 'man'
+// };
+//
+// pythonShell.defaultOptions = pythonOptions;
+//
+// var word2vec = new pythonShell('word2vec.py', pythonOptions);
+// //word2vec.send({command: 'most_similar', args: 'man'});
+//
+// pythonShell.run('word2vec.py', options, function (err, results) {
+//   if (err) throw err;
+//   // results is an array consisting of messages collected during execution
+//   console.log('results: %j', results);
+// });
+//
+// try{
+//   word2vec.send({command: 'most_similar', args: 'man'}).end(function(){
+//     console.log('sent');
+//   });
+// }catch (err){
+//
+// }
+//
+// var pyshell = new pythonShell('echo_json.py', {
+//     mode: 'json'
+// });
+// pyshell.on('message', function (message) {
+//     console.log('in ON function');
+// }).receive('{"a"').receive(':').receive('true}\n').end(function(){
+//   console.log('received');
+//
+// });
 
 
 
