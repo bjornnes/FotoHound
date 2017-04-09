@@ -1,6 +1,6 @@
 //SQL SETNINGER
 var mysql = require('promise-mysql');
-var SearchClass = require('../routes/search');
+//var SearchClass = require('../routes/search');
 
 var pool = mysql.createPool({
   //Proterties...
@@ -18,10 +18,17 @@ var DataHandler = function() {
 
 // var search = new SearchClass();
 // exports.search = search;
+<<<<<<< HEAD
 
 function findImagesFromWord(req, res){
 
 }
+=======
+//
+// function findImagesFromWord(req, res){
+//
+// }
+>>>>>>> pythontest
 
 //Getting all data
 function getAllData(req, res){
