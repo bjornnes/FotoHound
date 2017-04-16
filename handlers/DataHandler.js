@@ -18,17 +18,7 @@ var DataHandler = function() {
 
 // var search = new SearchClass();
 // exports.search = search;
-<<<<<<< HEAD
 
-function findImagesFromWord(req, res){
-
-}
-=======
-//
-// function findImagesFromWord(req, res){
-//
-// }
->>>>>>> pythontest
 
 //Getting all data
 function getAllData(req, res){
