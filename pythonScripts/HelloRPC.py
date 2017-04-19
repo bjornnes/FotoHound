@@ -7,15 +7,15 @@ class HelloRPC(object):
 
     global model
     model = KeyedVectors.load_word2vec_format('../../text8.bin', binary=True)
-    print 'Connection started..'
+    print ('Connection started..')
     def word2vecSocket(self, name):
         #model.most_similar
-        print name
+        print (name)
         #return json
         return  model.most_similar(name)
 
 s = zerorpc.Server(HelloRPC())
-s.bind("tcp://0.0.0.0:4242")
+s.bind("tcp://127.0.0.1:4242")
 s.run()
 
 # from socketIO_client import SocketIO
