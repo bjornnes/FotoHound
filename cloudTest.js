@@ -1,20 +1,16 @@
-var Canvas = require('canvas');
-var cloud = require('d3-cloud');
-var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
-    .map(function(d) {
-      return {text: d, size: 10 + Math.random() * 90};
-    });
+//
+// var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
+//     .map(function(d) {
+//       return {text: d, size: 10 + Math.random() * 90};
+//     });
+// console.log(words);
 
-var layout = cloud().size([960, 500])
-    .canvas(function() { return new Canvas(1, 1); })
-    .words(words)
-    .padding(5)
-    .rotate(function() { return ~~(Math.random() * 2) * 90; })
-    .font("Impact")
-    .fontSize(function(d) { return d.size; })
-    .on("end", end)
-    .start();
 
-function end(words) { console.log(JSON.stringify(words)); }
-
-console.log(words);
+var socket = require('./socketTest');
+socket.word2vec('woman', function(result){
+  var res = result.map(function(d){
+    var dd = (''+d).split(',');
+    return {word: dd[0], prob: dd[1]};
+  })
+  console.log(res);
+});

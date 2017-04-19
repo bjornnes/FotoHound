@@ -1,15 +1,16 @@
 var zerorpc = require("zerorpc");
 var routes = require('./routes/imageRest');
 
-var input = 'man';
-
 var client = new zerorpc.Client();
-client.connect("tcp://127.0.0.1:4242");
-client.invoke("word2vecSocket", input, function(error, res, more) {
+function word2vec(input, callback){
+  client.connect("tcp://127.0.0.1:4242");
+  client.invoke("word2vecSocket", input, function(error, res, more) {
+      callback(res);
+  });
+  //client.disconnect();
+}
 
-    module.exports = res; 
-    console.log('resultat: ', '' + res);
-});
+exports.word2vec = word2vec;
 
 // var app = require('express')()
 //   , server = require('http').createServer(app)
