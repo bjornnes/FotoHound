@@ -13,6 +13,10 @@
     ],
     "types" : [
       "core-js"
+    ],
+    "filesGlob": [
+        "client/app/**/*.ts",
+        "typings/index.d.ts"
     ]
   },
   "exclude": [

@@ -1,6 +1,7 @@
 var express = require('express');
 var router = module.exports =  express.Router();
 var server = require('../server');
+var relate = require('../handlers/queryHandler');
 
 var Canvas = require('canvas');
 var cloud = require('d3-cloud');
@@ -35,8 +36,19 @@ router.get('/', function(req, res, next){
   server.notify('searchquery', ''+searchQuery);
   server.notify('machinelearning', ''+machineLearning);
 
-  //Send inn til ML-interface
-  var words = null; //{word: 'etOrd', prob: 0.999};
+  var words;
+  if(machineLearning == 'true'){
+    //Send to ML-interface
+    relate.findRelatedWords(searchQuery, function(res){
+      words = res;
+      console.log(words);
+      for(i in words){
+        console.log('word:',words[i].word,'prob:',words[i].prob);
+      }
+    }); //{word: 'etOrd', prob: 0.999};
+  }else{
+    words = [{'word': searchQuery, 'prob': 1.00}];
+  }
 
   //Hent fra DB
   for (var word in words) {
@@ -44,6 +56,7 @@ router.get('/', function(req, res, next){
 
     }
   }
+
 
   if(machineLearning == 'true'){
     server.notify('true?', 'ja');
