@@ -7,7 +7,6 @@ import {Observable} from 'rxjs/Observable';
 @Component({
   selector: 'search',
   templateUrl: 'app/html/search.html'
-  //providers: [SearchService]
 })
 export class SearchComponent{
   private searchField;
@@ -17,11 +16,7 @@ export class SearchComponent{
 
   constructor(private searchService: SearchService){
     this.searchField = "";
-    this.machineLearning = false;
-  }
-
-  ngOnInit(){
-    //this.searchService.search('',false).subscribe(searchRes => this.result = searchRes);
+    this.machineLearning = true;
   }
 
   search(search: string, machineLearning: boolean){

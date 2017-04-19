@@ -3,10 +3,13 @@
         <input type="text" #searchQuery placeholder="Type in searchword here..." class="form-control">
         <button class="btn btn-block" (click)="search(searchQuery.value, machineLearning.checked)">Search</button>
         <div class="chechbox">
-            <label><input type="checkbox" #machineLearning value=""> Machine learning on/off</label>
+            <label><input type="checkbox" #machineLearning value="" checked="true"> Machine learning on/off</label>
         </div>
     </div>
 </form>
+<div class="wordCloud">
+  <canvas #wordCanvas></canvas>
+</div>
 <hr>
 <div class="resultArea">
     <a class="aImg" *ngFor="let element of result" href="{{element.src}}">

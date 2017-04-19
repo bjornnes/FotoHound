@@ -47,13 +47,12 @@ var credentials = {
     passphrase: '1234'
 };
 
-//HTTPS SERVER
+//HTTPS-SERVER
 var https_server = https.createServer(credentials, app);
 
 //HTTPSERVER
 // var httpServer= http.createServer(app);
 // httpServer.listen(8080);
-//var https_server = https.createServer(credentials, app);
 var word2vecResults = require('./socketTest');
 console.log(word2vecResults);
 

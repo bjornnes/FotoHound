@@ -25,11 +25,8 @@ System.register(["angular2/core", "../services/search.service"], function (expor
                 function SearchComponent(searchService) {
                     this.searchService = searchService;
                     this.searchField = "";
-                    this.machineLearning = false;
+                    this.machineLearning = true;
                 }
-                SearchComponent.prototype.ngOnInit = function () {
-                    //this.searchService.search('',false).subscribe(searchRes => this.result = searchRes);
-                };
                 SearchComponent.prototype.search = function (search, machineLearning) {
                     var _this = this;
                     console.log(search, machineLearning);
@@ -41,7 +38,6 @@ System.register(["angular2/core", "../services/search.service"], function (expor
                 core_1.Component({
                     selector: 'search',
                     templateUrl: 'app/html/search.html'
-                    //providers: [SearchService]
                 }),
                 __metadata("design:paramtypes", [search_service_1.SearchService])
             ], SearchComponent);

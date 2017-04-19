@@ -2,12 +2,49 @@ var express = require('express');
 var router = module.exports =  express.Router();
 var server = require('../server');
 
-router.get('/', function(req, res, next){
-  server.notify('searchquery', ''+req.query.searchQuery);
-  server.notify('machinelearning', ''+req.query.machineLearning);
+var Canvas = require('canvas');
+var cloud = require('d3-cloud');
+
+
+
+router.get('/words', function(req, res, next){
   var result;
-  var searchQuery = req.query.searchQuery;
+  //var words = req.query.words;
+  var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
+      .map(function(d) {
+        return {text: d, size: 10 + Math.random() * 90};
+      });
+
+      cloud().size([960, 500])
+          .canvas(function() { return new Canvas(1, 1); })
+          .words(words)
+          .padding(5)
+          .rotate(function() { return ~~(Math.random() * 2) * 90; })
+          .font("Impact")
+          .fontSize(function(d) { return d.size; })
+          .on("end", end)
+          .start();
+
+      function end(words) { res.send(JSON.stringify(words)); }
+});
+
+router.get('/', function(req, res, next){
+  var result;
+  var searchQuery = req.query.searchQuery.toLowerCase();
   var machineLearning = req.query.machineLearning;
+  server.notify('searchquery', ''+searchQuery);
+  server.notify('machinelearning', ''+machineLearning);
+
+  //Send inn til ML-interface
+  var words = null; //{word: 'etOrd', prob: 0.999};
+
+  //Hent fra DB
+  for (var word in words) {
+    if (object.hasOwnProperty(word)) {
+
+    }
+  }
+
   if(machineLearning == 'true'){
     server.notify('true?', 'ja');
     result = [
