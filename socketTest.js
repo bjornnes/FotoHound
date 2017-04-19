@@ -6,8 +6,8 @@ function word2vec(input, callback){
   client.connect("tcp://127.0.0.1:4242");
   client.invoke("word2vecSocket", input, function(error, res, more) {
       callback(res);
+      client.close();
   });
-  //client.disconnect();
 }
 
 exports.word2vec = word2vec;
