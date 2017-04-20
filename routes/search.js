@@ -50,10 +50,9 @@ router.get('/', function(req, res, next){
     words = [{'word': searchQuery, 'prob': 1.00}];
   }
 
-  //Hent fra DB
+  //Hent fra Database
   for (var word in words) {
     if (object.hasOwnProperty(word)) {
-
     }
   }
 
