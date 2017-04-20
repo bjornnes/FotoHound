@@ -1,9 +1,9 @@
-<div class="wordCloud">
-  <canvas #wordCanvas widht='500px' height='500px' id='wCloud'></canvas>
+<div class="wordCloud" id="wCloud">
 </div>
 <script src="../../node_modules/d3/build/d3.js"></script>
 <script src="../../node_modules/d3-cloud/build/d3.layout.cloud.js">
 //var Canvas = require('canvas');
+
 var cloud = d3.layout.cloud;
 var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
     .map(function(d) {
@@ -22,7 +22,7 @@ var layout = cloud().size([500, 500])
     console.log(layout.size);
 
 function draw(){
-  d3.select("wCloud").append("svg")
+  d3.select("#wCloud").append("svg")
       .attr("width", layout.size()[0])
       .attr("height", layout.size()[1])
     .append("g")
