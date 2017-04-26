@@ -1,18 +1,21 @@
 import zerorpc
 import logging
-from gensim.models import word2vec
+#from gensim.models import word2vec
 from gensim.models import KeyedVectors
 
 class HelloRPC(object):
 
-    global model
-    model = KeyedVectors.load_word2vec_format('../text8.bin', binary=True)
+
+    global word2vec_model
+    word2vec_model = KeyedVectors.load_word2vec_format('../../nowiki-articles-300.bin', binary=True)
+    global fasttext_model
+    fasttext_model = KeyedVectors.load_word2vec_format('../../nowiki-articles-300-fasttext.vec')
     print ('Connection started..')
     def word2vecSocket(self, name):
         #model.most_similar
         print (name)
         #return json
-        return  model.most_similar(name)
+        return  word2vec_model.most_similar(name) + fasttext_model.most_similar(name)
 
 s = zerorpc.Server(HelloRPC())
 s.bind("tcp://127.0.0.1:4242")
