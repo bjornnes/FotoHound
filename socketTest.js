@@ -12,6 +12,10 @@ function word2vec(input, callback){
   });
 }
 
+word2vec('hest', function(res){
+  console.log(res);
+});
+
 exports.word2vec = word2vec;
 
 // var app = require('express')()
