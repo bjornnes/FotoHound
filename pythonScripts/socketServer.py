@@ -4,8 +4,6 @@ import logging
 from gensim.models import KeyedVectors
 
 class HelloRPC(object):
-
-
     global word2vec_model
     word2vec_model = KeyedVectors.load_word2vec_format('../../nowiki-articles-300.bin', binary=True)
     global fasttext_model
@@ -16,7 +14,7 @@ class HelloRPC(object):
         print (name)
         #return json
         return  word2vec_model.most_similar(name) + fasttext_model.most_similar(name)
-
+        
 s = zerorpc.Server(HelloRPC())
 s.bind("tcp://127.0.0.1:4242")
 s.run()
