@@ -1,4 +1,5 @@
 var socket = require('../socketTest');
+var Hashmap = require('hashmap');
 
 function findRelatedWords(word, language, callback){
   if (language == 'nor'){
@@ -23,6 +24,7 @@ function findRelatedWords(word, language, callback){
 }
 
 function listLogic(words){
+  //var map = Hashmap();
   var map = {};
   for(i in words){
     temp = words[i].word;
@@ -48,6 +50,6 @@ function listLogic(words){
 exports.findRelatedWords = findRelatedWords;
 
 
-findRelatedWords('hest', function(res){
-  //console.log(res);
+findRelatedWords('hest', 'nor', function(res){
+  console.log(res);
 });
