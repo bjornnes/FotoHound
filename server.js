@@ -51,8 +51,8 @@ var credentials = {
 var https_server = https.createServer(credentials, app);
 
 //HTTPSERVER
-// var httpServer= http.createServer(app);
-// httpServer.listen(8080);
+//var httpServer= http.createServer(app);
+//httpServer.listen(8080);
 var word2vecResults = require('./socketTest');
 console.log(word2vecResults);
 

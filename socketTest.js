@@ -1,5 +1,7 @@
 var zerorpc = require("zerorpc");
 var routes = require('./routes/imageRest');
+var relate = require('./handlers/queryHandler');
+
 
 
 var client = new zerorpc.Client();
@@ -13,7 +15,6 @@ function word2vec(input, callback){
 }
 
 word2vec('hest', function(res){
-  console.log(res);
 });
 
 exports.word2vec = word2vec;
