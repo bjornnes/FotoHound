@@ -22,8 +22,12 @@ function findRelatedWords(word, callback){
         map[temp] = words[i];
       }
     }
-    console.log(JSON.stringify(map));
-    callback(JSON.stringify(map));
+
+    var array_values = new Array();
+    for (var key in map) {
+      array_values.push(map[key]);
+    }
+    callback(array_values);
   });
 }
 
