@@ -7,6 +7,7 @@ function findRelatedWords(word, language, callback){
         var dd = (''+d).split(',');
         return {word: dd[0], prob: dd[1]};
       });
+      var res = listLogic(res);
       callback(res);
     });
   }else if(language == 'eng'){
@@ -15,6 +16,7 @@ function findRelatedWords(word, language, callback){
         var dd = (''+d).split(',');
         return {word: dd[0], prob: dd[1]};
       });
+      var res = listLogic(res);
       callback(res);
     });
   }
