@@ -14,7 +14,7 @@ class HelloRPC(object):
         print (name)
         #return json
         return  word2vec_model.most_similar(name) + fasttext_model.most_similar(name)
-        
+
 s = zerorpc.Server(HelloRPC())
 s.bind("tcp://158.38.43.76:4242")
 s.run()
