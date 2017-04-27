@@ -6,8 +6,30 @@ function findRelatedWords(word, callback){
       var dd = (''+d).split(',');
       return {word: dd[0], prob: dd[1]};
     });
-    callback(res);
+    var map = {};
+    var words;
+    words = res;
+    for(i in words){
+      temp = words[i].word;
+      temp = temp.toString().trim();
+      if(temp in map){
+        var prob;
+        prob = Number(map[temp].prob) + Number(words[i].prob);
+        words[i].prob = prob;
+        delete map[temp];
+        map[temp] = words[i];
+      }else{
+        map[temp] = words[i];
+      }
+    }
+    console.log(JSON.stringify(map));
+    callback(JSON.stringify(map));
   });
 }
 
 exports.findRelatedWords = findRelatedWords;
+
+
+findRelatedWords('hest', function(res){
+  //console.log(res);
+});
