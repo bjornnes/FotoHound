@@ -39,7 +39,8 @@ router.get('/', function(req, res, next){
   var words;
   if(machineLearning == 'true'){
     //Send to ML-interface
-    relate.findRelatedWords(searchQuery, function(res){
+    var lang = 'nor';
+    relate.findRelatedWords(searchQuery, lang, function(res){
       words = res;
       console.log(words);
       for(i in words){
