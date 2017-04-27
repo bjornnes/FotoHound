@@ -6,18 +6,24 @@ var relate = require('./handlers/queryHandler');
 
 var client = new zerorpc.Client();
 client.connect("tcp://158.38.43.76:4242");
-function word2vec(input, callback){
+function norwegianWord(input, callback){
 
-  client.invoke("word2vecSocket", input, function(error, res, more) {
+  client.invoke("norwegianSocket", input, function(error, res, more) {
       callback(res);
       // client.close();
   });
 }
 
-word2vec('hest', function(res){
-});
+function englishWord(input, callback){
 
-exports.word2vec = word2vec;
+  client.invoke("englishSocket", input, function(error, res, more) {
+      callback(res);
+      // client.close();
+  });
+}
+
+exports.norwegianWord = norwegianWord;
+exports.englishWord = englishWord;
 
 // var app = require('express')()
 //   , server = require('http').createServer(app)

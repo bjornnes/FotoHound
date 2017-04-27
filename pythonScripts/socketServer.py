@@ -3,21 +3,30 @@ import logging
 #from gensim.models import word2vec
 from gensim.models import KeyedVectors
 
-class HelloRPC(object):
+class SocketServer(object):
 
 
-    global word2vec_model
-    word2vec_model = KeyedVectors.load_word2vec_format('../../nowiki-articles-300.bin', binary=True)
-    global fasttext_model
-    fasttext_model = KeyedVectors.load_word2vec_format('../../nowiki-articles-300-fasttext.vec')
+    global word2vec_model_NO
+    word2vec_model_NO = KeyedVectors.load_word2vec_format('../../nowiki-articles-300.bin', binary=True)
+    global fasttext_model_NO
+    fasttext_model_NO = KeyedVectors.load_word2vec_format('../../nowiki-articles-300-fasttext.vec')
+    global word2vec_model_ENG
+    word2vec_model_ENG = KeyedVectors.load_word2vec_format('../../enwiki-articles-300.bin', binary=True)
+    global fasttext_model_ENG
+    fasttext_model_ENG = KeyedVectors.load_word2vec_format('../../enwiki-articles-300-fasttext.vec')
+
     print ('Connection started..')
-    def word2vecSocket(self, name):
+    def norwegianSocket(self, name):
         #model.most_similar
         print (name)
         #return json
-        return  word2vec_model.most_similar(name) + fasttext_model.most_similar(name)
+        return  word2vec_model_NO.most_similar(name) + fasttext_model_NO.most_similar(name)
 
-s = zerorpc.Server(HelloRPC())
+    def englishSocket(self, name):
+        print (name)
+        return  word2vec_model_ENG.most_similar(name) + fasttext_model_ENG.most_similar(name)
+
+s = zerorpc.Server(SocketServer())
 s.bind("tcp://158.38.43.76:4242")
 s.run()
 
