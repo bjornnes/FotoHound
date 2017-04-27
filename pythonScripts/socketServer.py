@@ -18,7 +18,7 @@ class HelloRPC(object):
         return  word2vec_model.most_similar(name) + fasttext_model.most_similar(name)
 
 s = zerorpc.Server(HelloRPC())
-s.bind("tcp://127.0.0.1:4242")
+s.bind("tcp://158.38.43.76:4242")
 s.run()
 
 # from socketIO_client import SocketIO
