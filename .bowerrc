@@ -1,4 +1,4 @@
 {
-  "directory": "myApp/client/components/",
+  "directory": "client/app/bower_components/",
   "timeout": 120000
 }

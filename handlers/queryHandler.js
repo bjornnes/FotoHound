@@ -20,7 +20,7 @@ function findRelatedWords(word, language, callback){
 function mapper(result){
   var res = result.map(function(d){
     var dd = (''+d).split(',');
-     return {word: dd[0].replace(/[^a-z0-9\'\`\-\—\'æøå\u00DE-\u017F]/g,''), prob: dd[1], orig: dd[0]};
+     return {word: dd[0].replace(/[^a-z0-9\'\`\-\—\'æøå\u00DE-\u017F]/g,''), prob: dd[1]};//, orig: dd[0]};
 
   });
   return res;

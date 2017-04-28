@@ -2,6 +2,7 @@
 </div>
 <script src="../../node_modules/d3/build/d3.js"></script>
 <script src="../../node_modules/d3-cloud/build/d3.layout.cloud.js">
+
 //var Canvas = require('canvas');
 
 var cloud = d3.layout.cloud;
@@ -9,7 +10,7 @@ var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than
     .map(function(d) {
       return {text: d, size: 10 + Math.random() * 90};
     });
-
+console.log('helooo');
 var layout = cloud().size([500, 500])
     .canvas(function() { return new Canvas(1, 1); })
     .words(words)

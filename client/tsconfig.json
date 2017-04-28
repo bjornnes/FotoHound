@@ -13,7 +13,8 @@
     ],
     "types" : [
       "core-js"
-    ]
+    ],
+    "allowJs": true
   },
   "exclude": [
     "node_modules",
