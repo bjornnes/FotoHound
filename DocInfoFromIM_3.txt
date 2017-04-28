@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocInfo Version="8.0">
+  <FileInfo>
+    <ModDate>1487841509</ModDate>
+    <IsoModDate>2017-02-23T10:18:23Z</IsoModDate>
+    <CreateDate>1493298679</CreateDate>
+    <IsoCreateDate>2017-04-27T14:11:13Z</IsoCreateDate>
+    <SizekB>570</SizekB>
+    <NumberPages>0</NumberPages>
+    <FileType>1246774599</FileType>
+  </FileInfo>
+  <XMP><![CDATA[<x:xmpmeta xmlns:x="adobe:ns:meta/" x:xmptk="XMP Core 5.5.0">
+ <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+  <rdf:Description rdf:about=""
+    xmlns:fwl="http://ns.fotoware.com/iptcxmp-legacy/1.0/"
+    xmlns:photoshop="http://ns.adobe.com/photoshop/1.0/"
+    xmlns:xmp="http://ns.adobe.com/xap/1.0/"
+    xmlns:Iptc4xmpCore="http://iptc.org/std/Iptc4xmpCore/1.0/xmlns/"
+    xmlns:fwu="http://ns.fotoware.com/iptcxmp-user/1.0/"
+    xmlns:xmpMM="http://ns.adobe.com/xap/1.0/mm/"
+    xmlns:fwr="http://ns.fotoware.com/iptcxmp-reserved/1.0/"
+    xmlns:exif="http://ns.adobe.com/exif/1.0/"
+    xmlns:tiff="http://ns.adobe.com/tiff/1.0/"
+    xmlns:crs="http://ns.adobe.com/camera-raw-settings/1.0/"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+   fwl:ProgramVersion="7.0"
+   fwl:CreatedTime="152038+0000"
+   fwl:FixtureIdentifier="S1AETYUWGSAA"
+   fwl:EditStatus="ORIGINAL"
+   photoshop:CaptionWriter="FLR/YH/wy"
+   photoshop:Source="X01164"
+   photoshop:Credit="REUTERS"
+   photoshop:Headline="A worker inspects a cyclotrone inside a radiation bunker at the headquarters of Belgian group IBA in Louvain-la-Neuve"
+   photoshop:TransmissionReference="YH04"
+   photoshop:Country="Belgium"
+   photoshop:City="LOUVAIN-LA-NEUVE"
+   photoshop:DateCreated="2016-09-01"
+   photoshop:Category="I"
+   photoshop:Urgency="4"
+   photoshop:ICCProfile="sRGB IEC61966-2.1"
+   photoshop:ColorMode="3"
+   xmp:ModifyDate="2016-09-29T23:17:36+02:00"
+   xmp:MetadataDate="2016-09-29T23:17:36+02:00"
+   xmp:CreatorTool="Color Factory 7.1"
+   Iptc4xmpCore:CountryCode="BEL"
+   fwu:UserDefined135="en"
+   xmpMM:DocumentID="xmp.did:52D6EC1811804137 8D946F65C31A4A8D"
+   xmpMM:OriginalDocumentID="xmp.did:52D6EC1811804137 8D946F65C31A4A8D"
+   xmpMM:InstanceID="xmp.iid:E602C2CBD29B4A6D 86666941D291E170"
+   fwr:UniqueId="584B589148BE4D9F 8A261E0E23890E45"
+   fwr:ShortUniqueId="3454515419"
+   exif:PixelXDimension="2048"
+   exif:PixelYDimension="1394"
+   exif:ColorSpace="1"
+   tiff:Orientation="1"
+   tiff:XResolution="18000000/100000"
+   tiff:YResolution="18000000/100000"
+   tiff:ResolutionUnit="2"
+   crs:HasCrop="False"
+   crs:AlreadyApplied="True">
+   <photoshop:SupplementalCategories>
+    <rdf:Bag>
+     <rdf:li>HEA MEDST SCI</rdf:li>
+    </rdf:Bag>
+   </photoshop:SupplementalCategories>
+   <xmp:XMPFileStamps>
+    <rdf:Seq>
+     <rdf:li>2016-09-29T23:17:36+02:00</rdf:li>
+     <rdf:li>2016-09-29T23:17:36+02:00</rdf:li>
+     <rdf:li>2017-02-23T11:18:23+01:00</rdf:li>
+     <rdf:li>2017-02-23T11:18:23+01:00</rdf:li>
+    </rdf:Seq>
+   </xmp:XMPFileStamps>
+   <dc:description>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">A worker inspects a cyclotrone inside a radiation bunker at the headquarters of Belgian group IBA, which makes proton therapy machines for the treatment of cancer, in Louvain-la-Neuve, Belgium, July 22, 2016. Picture taken July 22, 2016. REUTERS/Francois Lenoir </rdf:li>
+    </rdf:Alt>
+   </dc:description>
+   <dc:title>
+    <rdf:Alt>
+     <rdf:li xml:lang="x-default">CANCER-PROTONTHERAPY/IBA</rdf:li>
+    </rdf:Alt>
+   </dc:title>
+   <dc:creator>
+    <rdf:Seq>
+     <rdf:li>FRANCOIS LENOIR</rdf:li>
+    </rdf:Seq>
+   </dc:creator>
+  </rdf:Description>
+ </rdf:RDF>
+</x:xmpmeta>]]></XMP>
+</DocInfo>
