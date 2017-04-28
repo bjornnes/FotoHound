@@ -4,23 +4,26 @@ var Hashmap = require('hashmap');
 function findRelatedWords(word, language, callback){
   if (language == 'nor'){
     socket.norwegianWord(word, function(result){
-      var res = result.map(function(d){
-        var dd = (''+d).split(',');
-        return {word: dd[0], prob: dd[1]};
-      });
-      var res = listLogic(res);
+      var res = mapper(result);
+      res = listLogic(res);
       callback(res);
     });
   }else if(language == 'eng'){
     socket.englishWord(word, function(result){
-      var res = result.map(function(d){
-        var dd = (''+d).split(',');
-        return {word: dd[0], prob: dd[1]};
-      });
-      var res = listLogic(res);
+      var res = mapper(result);
+      res = listLogic(res);
       callback(res);
     });
   }
+}
+
+function mapper(result){
+  var res = result.map(function(d){
+    var dd = (''+d).split(',');
+     return {word: dd[0].replace(/[^a-z0-9\'\`\-\—\'æøå\u00DE-\u017F]/g,''), prob: dd[1], orig: dd[0]};
+
+  });
+  return res;
 }
 
 function listLogic(words){
@@ -50,6 +53,6 @@ function listLogic(words){
 exports.findRelatedWords = findRelatedWords;
 
 
-findRelatedWords('hest', 'nor', function(res){
-  console.log(res);
-});
+// findRelatedWords('soda', 'eng', function(res){
+//   console.log(res);
+// });
