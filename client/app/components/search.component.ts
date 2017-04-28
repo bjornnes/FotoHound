@@ -20,7 +20,7 @@ export class SearchComponent{
   }
 
   search(search: string, machineLearning: boolean){
-    console.log(search, machineLearning);
+    
     this.searchService.search(search, machineLearning).subscribe(searchRes => this.result = searchRes);
   }
 }

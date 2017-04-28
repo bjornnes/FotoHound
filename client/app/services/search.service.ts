@@ -14,9 +14,16 @@ export class SearchService{
     this.params = new URLSearchParams();
   }
 
-  search(search: string, machineLearning: boolean){
+  words(search: string, machineLearning: boolean){
     this.params.set('searchQuery', search);
     this.params.set('machineLearning', machineLearning);
+    return this.http.get('search/words', {
+      search: this.params
+    }).map(res => res.json());
+  }
+
+  search(search: string, machineLearning: boolean){
+    this.params.set('searchQuery', search);
     return this.http.get('search/', {
       search: this.params
     }).map(res => res.json());

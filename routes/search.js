@@ -9,28 +9,6 @@ var cloud = require('d3-cloud');
 
 
 router.get('/words', function(req, res, next){
-  var result;
-  //var words = req.query.words;
-  var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
-      .map(function(d) {
-        return {text: d, size: 10 + Math.random() * 90};
-      });
-
-      cloud().size([960, 500])
-          .canvas(function() { return new Canvas(1, 1); })
-          .words(words)
-          .padding(5)
-          .rotate(function() { return ~~(Math.random() * 2) * 90; })
-          .font("Impact")
-          .fontSize(function(d) { return d.size; })
-          .on("end", end)
-          .start();
-
-      function end(words) { res.send(JSON.stringify(words)); }
-});
-
-router.get('/', function(req, res, next){
-  var result;
   var searchQuery = req.query.searchQuery.toLowerCase();
   var machineLearning = req.query.machineLearning;
   server.notify('searchquery', ''+searchQuery);
@@ -43,13 +21,19 @@ router.get('/', function(req, res, next){
     relate.findRelatedWords(searchQuery, lang, function(res){
       words = res;
       console.log(words);
-      for(i in words){
-        console.log('word:',words[i].word,'prob:',words[i].prob);
-      }
+      // for(i in words){
+      //   console.log('word:',words[i].word,'prob:',words[i].prob);
+      // }
     }); //{word: 'etOrd', prob: 0.999};
   }else{
     words = [{'word': searchQuery, 'prob': 1.00}];
   }
+  res.send(words);
+});
+
+router.get('/', function(req, res, next){
+  var result;
+  var machineLearning = 'true';
 
   //Hent fra Database
   for (var word in words) {
@@ -76,3 +60,23 @@ router.get('/', function(req, res, next){
   }
   res.send(result);
 });
+/*
+var result;
+//var words = req.query.words;
+var words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
+    .map(function(d) {
+      return {text: d, size: 10 + Math.random() * 90};
+    });
+
+    cloud().size([960, 500])
+        .canvas(function() { return new Canvas(1, 1); })
+        .words(words)
+        .padding(5)
+        .rotate(function() { return ~~(Math.random() * 2) * 90; })
+        .font("Impact")
+        .fontSize(function(d) { return d.size; })
+        .on("end", end)
+        .start();
+
+    function end(words) { res.send(JSON.stringify(words)); }
+    */
