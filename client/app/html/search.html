@@ -1,9 +1,16 @@
 <form class="well">
+  <select class="selectpicker" data-widt="fit">
+    <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+    <option data-content='<span class="flag-icon flag-icon-mx"></span> Español'>Español</option>
+    <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+    <option data-content='<span class="flag-icon flag-icon-no"></span> Norwegian'>Norwegian</option>
+  </select>
     <div class="form-group">
         <input type="text" #searchQuery placeholder="Type in searchword here..." class="form-control">
         <button class="btn btn-block" (click)="search(searchQuery.value, machineLearning.checked)">Search</button>
         <div class="chechbox">
             <label><input type="checkbox" #machineLearning value="" checked="true"> Machine learning on/off</label>
+            <label><input type="checkbox" #language value="" checked="true"> English</label>
         </div>
     </div>
 </form>

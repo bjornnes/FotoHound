@@ -27,10 +27,10 @@ System.register(["angular2/core", "../services/search.service"], function (expor
                     this.searchField = "";
                     this.machineLearning = true;
                 }
-                SearchComponent.prototype.search = function (search, machineLearning) {
+                SearchComponent.prototype.search = function (search, machineLearning, language) {
                     var _this = this;
                     console.log(search, machineLearning);
-                    this.searchService.search(search, machineLearning).subscribe(function (searchRes) { return _this.result = searchRes; });
+                    this.searchService.search(search, machineLearning, language).subscribe(function (searchRes) { return _this.result = searchRes; });
                 };
                 return SearchComponent;
             }());

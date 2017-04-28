@@ -19,9 +19,9 @@ export class SearchComponent{
     this.machineLearning = true;
   }
 
-  search(search: string, machineLearning: boolean){
+  search(search: string, machineLearning: boolean, language: boolean){
     console.log(search, machineLearning);
-    this.searchService.search(search, machineLearning).subscribe(searchRes => this.result = searchRes);
+    this.searchService.search(search, machineLearning, language).subscribe(searchRes => this.result = searchRes);
   }
 }
 

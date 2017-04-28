@@ -14,14 +14,15 @@ export class SearchService{
     this.params = new URLSearchParams();
   }
 
-  search(search: string, machineLearning: boolean){
+  search(search: string, machineLearning: boolean, language: boolean){
     this.params.set('searchQuery', search);
     this.params.set('machineLearning', machineLearning);
+    this.params.set('language', language);
     return this.http.get('search/', {
       search: this.params
     }).map(res => res.json());
   }
-
+ 
 }
 
 interface Result{
