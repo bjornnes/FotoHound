@@ -14,7 +14,14 @@
         </div>
     </div>
 </form>
-<div class="wordCloud" id="wCloud"></div>
+<div class="wordCloud" id="wCloud" #wCloud>
+  <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
+
+  </canvas>
+  <canvas #wCloudd id="wCloudd">
+
+  </canvas>
+</div>
 <hr>
 <div class="resultArea">
     <a class="aImg" *ngFor="let element of result" href="{{element.src}}">

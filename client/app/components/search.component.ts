@@ -4,11 +4,10 @@ import {SearchService} from '../services/search.service';
 import {Observable} from 'rxjs/Observable';
 import * as D3 from '../../node_modules/d3-cloud/build/d3.layout.cloud.js';
 import * as D33 from '../../node_modules/d3/build/d3.js';
-import Canvas from '../../node_modules/canvas/lib/canvas.js'
+//import Canvas from '../../node_modules/canvas/lib/canvas.js'
 
 
 declare let d3:any;
-declare let canvas:any;
 
 
 @Component({
@@ -16,7 +15,8 @@ declare let canvas:any;
   templateUrl: 'app/html/search.html'
 })
 export class SearchComponent{
-  @ViewChild('#wCloud') private canvas;
+  @ViewChild('wCloud.wordCloud') private div;
+  @ViewChild('wClouddd') private canvasH;
   private searchField;
   private machineLearning;
   public result: Result[];
@@ -30,8 +30,12 @@ export class SearchComponent{
   constructor(private searchService: SearchService, private _element: ElementRef){
     this.searchField = "";
     this.machineLearning = true;
-    this._htmlElement = this._element.nativeElement;
-    this._host = D33.select(this._element.nativeElement);
+  }
+
+  ngAfterViewInit(){
+    //this._htmlElement = this._element.nativeElement;
+    //this._host = D33.select(this.div.nativeElement);
+    console.log('initiated view');
   }
 
   search(search: string, machineLearning: boolean, language: boolean){
@@ -43,7 +47,7 @@ export class SearchComponent{
         console.log('calling initCloud');
         console.log('comp',this.words);
         this.initCloud();
-        this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes);
+        //this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes);
         //this._populate();
 
       }
@@ -51,37 +55,39 @@ export class SearchComponent{
   }
 
   private initCloud(){
-    var d333 = D3;
-    this.words = ["Hello", "world", "normally", "you", "want", "more", "words", "than", "this"]
-        .map(function(d) {
-          return {text: d, size: 10 + Math.random() * 90};
+    console.log(this.canvasH);
+
+    var words = this.words
+        .map(d => {
+          return {text: d.word, size: 10 + Math.random() * 90};
         });
-        console.log(this.canvas);
-        var layout = D3.cloud().size([500, 500])
-            .canvas(function() { return new Canvas('testt'); })
-            .words(this.words)
+        //console.log(this.canvas);
+        var layout = D3.cloud().size([300, 300])
+            .canvas(()=> this.canvasH.nativeElement)
+            .words(words)
             .padding(5)
             .rotate(function() { return ~~(Math.random() * 2) * 90; })
             .font("Impact")
             .fontSize(function(d) { return d.size; })
             .on("end", this.draw)
             .start();
-            console.log('cavnas',this.canvas);
-
-
   }
-  private draw(){
-    d3.select("#wCloud").append("svg")
+
+  private draw(words){
+    var fill = D33.scaleOrdinal(D33.schemeCategory20);
+    console.log('words',JSON.stringify(words));
+    console.log(this.div);
+    d3.select('#wCloud').append("svg")
           .attr("width", 300)
           .attr("height", 300)
         .append("g")
           .attr("transform", "translate(" + 300 / 2 + "," + 300 / 2 + ")")
         .selectAll('text')
-          .data(this.words)
+          .data(words)
         .enter().append('text')
         .style('font-size', d => d.size + 'px')
         .style("font-family", "Impact")
-        .style('fill', (d, i) => { return'#000'})
+        .style('fill', (d, i) => { return fill(i)})
         .attr('text-anchor', 'middle')
         .attr('transform', d => 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')')
         .text(d => {
@@ -94,7 +100,7 @@ export class SearchComponent{
         .map(function(d) {
           return {text: d, size: 10 + Math.random() * 90};
         });
-        /*var layout = D3.cloud().size([500, 500])
+        var layout = D3.cloud().size([500, 500])
             .canvas(function() { return new Canvas(1, 1); })
             .words(words)
             .padding(5)
@@ -120,7 +126,7 @@ export class SearchComponent{
           return d.text;
         });
   }
-  private _margin: {          // Space between the svg borders and the actual chart graphic
+  /*private _margin: {          // Space between the svg borders and the actual chart graphic
   top: number,
   right: number,
   bottom: number,
@@ -164,7 +170,7 @@ private _setup() {
 }
 
 private _buildSVG() {
-  //this._host.html('');
+  //this._host.html('#wCloud');
   this._svg = this._host
                   .append('svg')
                   .attr('width', this._width + this._margin.left + this._margin.right)
@@ -194,7 +200,27 @@ private _populate() {
       this._drawWordCloud(words);
     })
     .start();
-}*/
+}
+
+
+  private _drawWordCloud(words) {
+    this._svg
+        .selectAll('text')
+        .data(words)
+        .enter()
+        .append('text')
+        .style('font-size', d => d.size + 'px')
+        .style('fill', (d, i) => {
+          return this._fillScale(i);
+        })
+        .attr('text-anchor', 'middle')
+        .attr('transform', d => 'translate(' + [d.x, d.y] + ')rotate(' + d.rotate + ')')
+        //.attr('class', 'word-cloud')
+        .text(d => {
+          return d.word;
+        });
+  }*/
+
 }
 
 interface Result{
