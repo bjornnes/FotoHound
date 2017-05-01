@@ -31,6 +31,8 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 function SearchComponent(searchService, _element) {
                     this.searchService = searchService;
                     this._element = _element;
+                    this.usedWords = '';
+                    this.remainingWords = '';
                     this.searchField = "";
                     this.machineLearning = true;
                 }
@@ -38,6 +40,15 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     //this._htmlElement = this._element.nativeElement;
                     //this._host = D33.select(this.div.nativeElement);
                     console.log('initiated view');
+                    this.svgSize = {
+                        width: 500,
+                        height: 500
+                    };
+                    D33.select('#wCSVG')
+                        .attr("width", this.svgSize.width)
+                        .attr("height", this.svgSize.height)
+                        .append("g")
+                        .attr("transform", "translate(" + this.svgSize.width / 2 + "," + this.svgSize.height / 2 + ")");
                 };
                 SearchComponent.prototype.search = function (search, machineLearning, language) {
                     var _this = this;
@@ -46,38 +57,43 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         console.log('calling initCloud');
                         console.log('comp', _this.words);
                         _this.initCloud();
-                        //this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes);
-                        //this._populate();
+                        _this.usedWords = _this.words.slice(0, 9);
+                        _this.remainingWords = _this.words.slice(10);
+                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.result = searchRes; });
                     });
                 };
                 SearchComponent.prototype.initCloud = function () {
                     var _this = this;
-                    console.log(this.canvasH);
-                    var words = this.words
+                    var words = this.words //.slice(0,9)
                         .map(function (d) {
-                        return { text: d.word, size: 10 + Math.random() * 90 };
+                        var size = (Math.log(Math.pow((d.prob) * 7, 70))) - 80;
+                        (size > 100) ? size = 100 : size = size;
+                        (size < 13) ? size = 13 : size = size;
+                        return { text: d.word, size: size };
                     });
                     //console.log(this.canvas);
-                    var layout = D3.cloud().size([300, 300])
+                    var layout = D3.cloud().size([500, 500])
                         .canvas(function () { return _this.canvasH.nativeElement; })
                         .words(words)
                         .padding(5)
                         .rotate(function () { return ~~(Math.random() * 2) * 90; })
                         .font("Impact")
                         .fontSize(function (d) { return d.size; })
-                        .on("end", this.draw)
+                        .on("end", this.drawNew)
                         .start();
                 };
-                SearchComponent.prototype.draw = function (words) {
+                SearchComponent.prototype.drawNew = function (words) {
+                    var svgSize = {
+                        width: 500,
+                        height: 500
+                    };
                     var fill = D33.scaleOrdinal(D33.schemeCategory20);
                     console.log('words', JSON.stringify(words));
-                    console.log(this.div);
-                    d3.select('#wCloud').append("svg")
-                        .attr("width", 300)
-                        .attr("height", 300)
-                        .append("g")
-                        .attr("transform", "translate(" + 300 / 2 + "," + 300 / 2 + ")")
-                        .selectAll('text')
+                    var wC = D33.select('#wCSVG');
+                    wC.select('g').remove();
+                    wC = wC.append("g")
+                        .attr("transform", "translate(" + svgSize.width / 2 + "," + svgSize.height / 2 + ")");
+                    wC.selectAll('text')
                         .data(words)
                         .enter().append('text')
                         .style('font-size', function (d) { return d.size + 'px'; })

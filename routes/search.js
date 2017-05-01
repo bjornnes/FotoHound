@@ -21,6 +21,7 @@ router.get('/words', function(req, res, next){
     var lang = (language=='true')? 'eng' : 'nor';
     relate.findRelatedWords(searchQuery, lang, function(result){
       words = result;
+      console.log(words);
       res.send(words);
       // for(i in words){
       //   console.log('word:',words[i].word,'prob:',words[i].prob);

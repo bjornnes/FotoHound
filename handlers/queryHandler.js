@@ -34,11 +34,12 @@ function listLogic(words){
     temp = temp.toString().trim();
     if(temp in map){
       var prob;
-      prob = Number(map[temp].prob) + Number(words[i].prob);
+      prob = map[temp].prob + Number(words[i].prob);
       words[i].prob = prob;
       delete map[temp];
       map[temp] = words[i];
     }else{
+      words[i].prob = Number(words[i].prob);
       map[temp] = words[i];
     }
   }
