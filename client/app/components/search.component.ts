@@ -57,13 +57,10 @@ export class SearchComponent{
   }
 
   search(search: string, machineLearning: boolean, language: boolean){
-    console.log(search, machineLearning);
     this.searchService.words(search, machineLearning, language).subscribe(
       wordRes => this.words = wordRes,
       error => console.log('error', error),
       () => {
-        console.log('calling initCloud');
-        console.log('comp',this.words);
         this.initCloud();
         this.usedWords = this.words.slice(0,9);
         this.remainingWords = this.words.slice(10);
