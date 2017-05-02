@@ -1,7 +1,10 @@
 var socket = require('../socketTest');
 var Hashmap = require('hashmap');
+var fs = require('fs'),
+    xml2js = require('xml2js');
 
 function findRelatedWords(word, language, callback){
+  word.toLowerCase();
   if (language == 'nor'){
     socket.norwegianWord(word, function(result){
       var res = mapper(result);
@@ -51,8 +54,31 @@ function listLogic(words){
 }
 
 exports.findRelatedWords = findRelatedWords;
-
-
 // findRelatedWords('soda', 'eng', function(res){
 //   console.log(res);
 // });
+var words;
+findRelatedWords('france', 'eng', function(res){
+  words = res;
+  var maps = {};
+  var parser = new xml2js.Parser();
+  fs.readFile('2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML', function(err, data) {
+      parser.parseString(data, function (err, resultt) {
+          var description = resultt.newsMessage.itemSet[0].newsItem[0].contentMeta[0].description[0]._.toLowerCase();
+          //console.log(description);
+          maps['2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML'] = Number(1.5);
+          for( i in words){
+            if(description.indexOf(words[i].word) > -1){
+                var value = maps['2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML'];
+                maps['2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML'] = Number(value + 1);
+                //steg 1 lage score for hvert bilde
+                // map, filnavn som key og prob er value
+              //console.log(maps['2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML']);
+            } else {
+            //  console.log('Fail');
+            }
+          }
+      });
+    });
+  //console.log(res);
+});
