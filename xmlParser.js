@@ -3,18 +3,29 @@ var parser1 = require('xml2json');
 var fs = require('fs'),
     xml2js = require('xml2js');
 
-var relate = require('./handlers/queryHandler');
+//var relate = require('./handlers/queryHandler');
 var lang = 'eng';
 var maps = {};
 var words;
 var description;
 
-relate.findRelatedWords('english', lang, function(res){
-  words = res;
+//relate.findRelatedWords('english', lang, function(res){
+  //words = res;
+
+var DOMParser = new DOMParser();
+
+var doc = DOMParser.parseFromString("test.xmp", "application/xml");
+  //console.log(doc);
+
   var parser = new xml2js.Parser();
-  fs.readFile('DocInfoFromIM_3.xml', function(err, data) {
-      parser.parseString(data, function (err, result) {
-          console.log(result.DocInfo.XMP);
+  fs.readFile('test.xmp', function(err, data) {
+    var doc = DOMParser.parseFromString(data.toString(), "application/xml");
+          //parser.parseString(data, function (err, result) {
+          // var raw_xmp = result.DocInfo.XMP;
+          // var trim_xmp = trim(raw_xmp, '[ ');
+          // var xmp = trim(trim_xmp, '] ');
+          console.log(JSON.stringify(doc));
+
 
           //var description = result.newsMessage.itemSet[0].newsItem[0].contentMeta[0].description[0]._.toLowerCase();
           // maps['2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML'] = Number(1.5);
@@ -27,7 +38,5 @@ relate.findRelatedWords('english', lang, function(res){
           //     console.log(maps['2017-04-28T133500Z_643870646_RC1E932D4950_RTRMADP_0_FRANCE-ELECTION-ZIDANE.XML']);
           //   }
           // }
-      });
+      //});
   });
-  //console.log(words);
-});

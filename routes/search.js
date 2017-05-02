@@ -50,7 +50,6 @@ router.get('/', function(req, res, next){
         }else{
           search_string += words[i].word;
         }
-
         console.log('word:',words[i].word,'prob:',words[i].prob);
       }
       console.log(search_string);
