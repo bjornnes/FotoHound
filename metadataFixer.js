@@ -1,16 +1,21 @@
 var fs  = require("fs");
 
-var path = 'IMTestFolder';
-var array = fs.readFileSync('IMTestFolder/FileList.txt').toString().split('\n');
+var clientPath = 'IMTestFolder/';
+var serverPath = 'client/IMTestFolder/';
+var array = fs.readFileSync('client/IMTestFolder/FileList.txt').toString().split('\n');
 
-function createFileList(){
+function createFileList(callback){
   var type = '.txt'
   var json = array.map(function(d){
-    var txt_path = path+d.replace('\r','')+'.txt';
+    var txt_path = serverPath+d.replace('\r','')+'.txt';
     var description = fs.readFileSync(txt_path).toString()
     //console.log(description);
-    return {src : path+d.replace('\r','')+'.jpg' , desc : description };
+    return {src : clientPath+d.replace('\r','')+'.jpg' , desc : description };
   });
+  callback(json);
 }
 
 exports.createFileList = createFileList;
+createFileList(function(d){
+  console.log(d);
+});

@@ -30,6 +30,7 @@ app.engine('html', require('ejs').renderFile);
 
 //Set static folder
 app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static('/home/steine/Pictures/'));
 
 //Body parser
 app.use(bodyParser.urlencoded({ extended: true }));
