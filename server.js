@@ -29,8 +29,9 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
 //Set static folder
-app.use(express.static(path.join(__dirname, 'client')));
-app.use(express.static('/home/steine/Pictures/'));
+app.use(express.static(path.join(__dirname, 'client')));        //Root folder for webpage
+app.use(express.static(path.join(__dirname, 'images')));   //Folder for images
+app.use(express.static('/home/steine/Pictures/hellooo/'));
 
 //Body parser
 app.use(bodyParser.urlencoded({ extended: true }));

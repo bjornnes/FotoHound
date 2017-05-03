@@ -1,8 +1,8 @@
 var fs  = require("fs");
 
 var clientPath = 'IMTestFolder/';
-var serverPath = 'client/IMTestFolder/';
-var array = fs.readFileSync('client/IMTestFolder/FileList.txt').toString().split('\n');
+var serverPath = 'images/'+clientPath;
+var array = fs.readFileSync(serverPath+'FileList.txt').toString().split('\n');
 
 function createFileList(callback){
   var type = '.txt'
@@ -16,6 +16,3 @@ function createFileList(callback){
 }
 
 exports.createFileList = createFileList;
-createFileList(function(d){
-  console.log(d);
-});
