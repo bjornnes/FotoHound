@@ -19,13 +19,19 @@ router.get('/words', function(req, res, next){
   if(machineLearning == 'true'){
     //Send to ML-interface
     var lang = (language=='true')? 'eng' : 'nor';
-    relate.findRelatedWords(searchQuery, lang, function(result){
-      words = result;
-      // console.log(words);
-      res.send(words);
-      // for(i in words){
-      //   console.log('word:',words[i].word,'prob:',words[i].prob);
-      // }
+    relate.findRelatedWords(searchQuery, lang, function(res){
+      words = res;
+      var search_string='';
+      console.log(words);
+      for(i in words){
+        if(i<words.length-1){
+          search_string += words[i].word + ' or ';
+        }else{
+          search_string += words[i].word;
+        }
+        console.log('word:',words[i].word,'prob:',words[i].prob);
+      }
+      console.log(search_string);
     }); //{word: 'etOrd', prob: 0.999};
   }else{
     words = [{'word': searchQuery, 'prob': 1.00}];

@@ -1,6 +1,11 @@
 //SQL SETNINGER
 var mysql = require('promise-mysql');
 //var SearchClass = require('../routes/search');
+var http = require('http');
+var options = {
+  host: 'fotoweb',
+  path: '/fotoweb/mittarkiv'
+};
 
 var pool = mysql.createPool({
   //Proterties...
