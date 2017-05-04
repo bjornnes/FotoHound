@@ -44,11 +44,12 @@ function listLogic(words){
     }
   }
 
-  var array_values = new Array();
-  for (var key in map) {
-    array_values.push(map[key]);
-  }
-  return array_values;
+  // var array_values = new Array();
+  // for (var key in map) {
+  //   array_values.push(map[key]);
+  // }
+  // return array_values;
+  return map;
 }
 
 exports.findRelatedWords = findRelatedWords;

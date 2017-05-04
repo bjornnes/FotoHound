@@ -16,19 +16,18 @@ router.get('/words', function(req, res, next){
   server.notify('searchquery', ''+searchQuery);
   server.notify('machinelearning', ''+machineLearning);
   var words;
+  words[searchQuery] = [{'word': searchQuery, 'prob': 2.00}];
   if(machineLearning == 'true'){
     //Send to ML-interface
     var lang = (language=='true')? 'eng' : 'nor';
     relate.findRelatedWords(searchQuery, lang, function(result){
-      words = result;
+      words += result;
       console.log(words);
       res.send(words);
-    }); //{word: 'etOrd', prob: 0.999};
+    });
   }else{
-    words = [{'word': searchQuery, 'prob': 1.00}];
     res.send(words);
   }
-
 });
 
 router.get('/', function(req, res, next){
