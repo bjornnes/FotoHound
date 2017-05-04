@@ -64,7 +64,9 @@ export class SearchComponent{
         this.initCloud();
         this.usedWords = this.words.slice(0,9);
         this.remainingWords = this.words.slice(10);
-        this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes);
+        this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes,
+          error => console.log('error',error),
+          () => console.log(this.result));
       }
   );
   }

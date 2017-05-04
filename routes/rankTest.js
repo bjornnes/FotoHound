@@ -1,6 +1,6 @@
 var HashMap = require('hashmap');
 
-var s = [ { word: 'flask', prob: 0.7164263129234314 },
+var map = [ { word: 'flask', prob: 0.7164263129234314 },
   { word: 'jar', prob: 0.7059789299964905 },
   { word: 'bag', prob: 0.6804860830307007 },
   { word: 'keg', prob: 0.6657484769821167 },

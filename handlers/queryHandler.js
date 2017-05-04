@@ -27,8 +27,7 @@ function mapper(result){
 }
 
 function listLogic(words){
-  //var map = Hashmap();
-  var map = {};
+  var map = [];
   for(i in words){
     temp = words[i].word;
     temp = temp.toString().trim();
@@ -44,12 +43,12 @@ function listLogic(words){
     }
   }
 
-  // var array_values = new Array();
-  // for (var key in map) {
-  //   array_values.push(map[key]);
-  // }
-  // return array_values;
-  return map;
+  var array_values = new Array();
+  for (var key in map) {
+    array_values.push(map[key]);
+  }
+  return array_values;
+  //return map;
 }
 
 exports.findRelatedWords = findRelatedWords;

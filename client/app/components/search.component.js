@@ -52,14 +52,11 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 };
                 SearchComponent.prototype.search = function (search, machineLearning, language) {
                     var _this = this;
-                    console.log(search, machineLearning);
                     this.searchService.words(search, machineLearning, language).subscribe(function (wordRes) { return _this.words = wordRes; }, function (error) { return console.log('error', error); }, function () {
-                        console.log('calling initCloud');
-                        console.log('comp', _this.words);
                         _this.initCloud();
                         _this.usedWords = _this.words.slice(0, 9);
                         _this.remainingWords = _this.words.slice(10);
-                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.result = searchRes; });
+                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.result = searchRes; }, function (error) { return console.log('error', error); }, function () { return console.log(_this.result); });
                     });
                 };
                 SearchComponent.prototype.initCloud = function () {

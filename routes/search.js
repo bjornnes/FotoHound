@@ -2,11 +2,12 @@ var express = require('express');
 var router = module.exports =  express.Router();
 var server = require('../server');
 var relate = require('../handlers/queryHandler');
-
+var rank = require('../handlers/resultRanker');
 var Canvas = require('canvas');
 var cloud = require('d3-cloud');
 
 var searchEngine = require('../metadataFixer');
+var words=[];
 
 
 router.get('/words', function(req, res, next){
@@ -15,15 +16,17 @@ router.get('/words', function(req, res, next){
   var language = req.query.language;
   server.notify('searchquery', ''+searchQuery);
   server.notify('machinelearning', ''+machineLearning);
-  var words;
-  words[searchQuery] = [{'word': searchQuery, 'prob': 2.00}];
+  var words = [];
+  words[0] = {'word': searchQuery, 'prob': 2.00};
+  var searchWord = {'word': searchQuery, 'prob': 2.00};
   if(machineLearning == 'true'){
     //Send to ML-interface
     var lang = (language=='true')? 'eng' : 'nor';
     relate.findRelatedWords(searchQuery, lang, function(result){
-      words += result;
-      console.log(words);
-      res.send(words);
+      result[result.length]=searchWord; //Regular JSON array used to construct word cloud
+      //result[1][searchWord.word]=searchWord;  //Hashmap of words containing a JSON object used for search and sorting etc.
+      //console.log('2d',result[1]);
+      res.send(result);
     });
   }else{
     res.send(words);
@@ -36,13 +39,15 @@ router.get('/', function(req, res, next){
   var words = JSON.parse(req.query.words);
   console.log('searchjs',words);
   var search_string='';
+  var help = 0;
+
   for(i in words){
-    console.log(words[i]);
-    if(i<words.length-1){
+    if(help < words.length-1){
       search_string += words[i].word + ' or ';
     }else{
       search_string += words[i].word;
     }
+    help++;
   }
   console.log(search_string);
   //Hent fra Database
@@ -66,8 +71,14 @@ router.get('/', function(req, res, next){
   //   {src: 'http://www.freewallpaperfullhd.com/wp-content/uploads/2015/03/wallpapers/two_swans-wallpaper-3840x2160.jpg', alt: 'Swans can be gay'}
   // ];
   searchEngine.createFileList(function(hits){
-    res.send(hits);
+    var test = hits;
+    rank.rank(words, test, function(sorted){
+      res.send(sorted);
+    });
   });
+  // function send(mes){
+  //   res.send(mes)
+  // }
   }else{
     server.notify('true?', 'nei');
     result = [{src: 'http://kids.nationalgeographic.com/content/dam/kids/photos/animals/Birds/H-P/mallard-male-standing.jpg.adapt.945.1.jpg', alt: 'metadataDuck'}];
