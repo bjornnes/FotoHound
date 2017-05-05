@@ -12,20 +12,36 @@
             <label><input type="checkbox" #machineLearning value="" checked="true"> Machine learning on/off</label>
             <label><input type="checkbox" #language value="" checked="true"> English</label>
         </div>
+        <button class="btn btn-block" (click)="openOverlay()">Test</button>
     </div>
 </form>
 <div class="wordCloud" id="wCloud" #wCloud>
   <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
-
   </canvas>
   <svg id="wCSVG">
   </svg>
 </div>
 <hr>
-<div class="resultArea">
-    <a class="aImg" *ngFor="let element of result" href="{{element.src}}">
-        <figure>
-            <img src="{{element.src}}" alt="{{element.desc}}" title="{{element.desc}}">
+<div class="result-area">
+    <a class="aImg" *ngFor="let element of result">
+        <figure (click)="openOverlay(element)">
+            <img #img src="{{element.src}}" alt="{{element.desc}}" title="{{element.desc}}" >
         </figure>
     </a>
+</div>
+
+<div #imgOverlay id="imgOverlay" class="imgoverlay">
+
+  <a #closeBtn href="javascript:void(0)" (click)="closeOverlay()" class="closebtn">&times;</a>
+
+
+  <div class="overlaycontent">
+    <img #overlayImgObject>
+    <br>
+    <br>
+    <span><a #overlayShowOrig target="_blank">Show original image</a><a #overlaySaveOrig download>Save image</a></span>
+
+  </div>
+
+
 </div>

@@ -17,6 +17,10 @@ declare let d3:any;
 export class SearchComponent{
   @ViewChild('wCloud.wordCloud') private div;
   @ViewChild('wClouddd') private canvasH;
+  @ViewChild('imgOverlay') private imageOverlay;
+  @ViewChild('overlayImgObject') private overlayImgObject;
+  @ViewChild('overlayShowOrig') private overlayShowOrig;
+  @ViewChild('overlaySaveOrig') private overlaySaveOrig;
   private searchField;
   private machineLearning;
   public result: Result[];
@@ -43,7 +47,6 @@ export class SearchComponent{
     //this._htmlElement = this._element.nativeElement;
     //this._host = D33.select(this.div.nativeElement);
     console.log('initiated view');
-
     this.svgSize = {
       width: 500,
       height: 500
@@ -99,7 +102,7 @@ export class SearchComponent{
     }
 
     var fill = D33.scaleOrdinal(D33.schemeCategory20);
-    console.log('words',JSON.stringify(words));
+    // console.log('words',JSON.stringify(words));
 
     var wC = D33.select('#wCSVG');
     wC.select('g').remove();
@@ -119,6 +122,20 @@ export class SearchComponent{
           return d.text;
         });
   }
+
+  public openOverlay(image){
+    console.log(image);
+    this.imageOverlay.nativeElement.style.height = "100%";
+    this.overlayImgObject.nativeElement.src = image.medium;
+    this.overlayImgObject.nativeElement.alt = image.desc;
+    this.overlayShowOrig.nativeElement.href = image.big;
+    this.overlaySaveOrig.nativeElement.href = image.big;
+  }
+
+  public closeOverlay(){
+    this.imageOverlay.nativeElement.style.height = "0%";
+  }
+
 }
 
 interface Result{

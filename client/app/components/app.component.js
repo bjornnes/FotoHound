@@ -1,4 +1,4 @@
-System.register(["angular2/core", "./search.component", "../services/search.service", "angular2/http"], function (exports_1, context_1) {
+System.register(["angular2/core", "./search.component", "../services/search.service", "angular2/http", "../directives/OverlayDirective"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -7,7 +7,7 @@ System.register(["angular2/core", "./search.component", "../services/search.serv
         return c > 3 && r && Object.defineProperty(target, key, r), r;
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, search_component_1, search_service_1, http_1, AppComponent;
+    var core_1, search_component_1, search_service_1, http_1, OverlayDirective_1, AppComponent;
     return {
         setters: [
             function (core_1_1) {
@@ -21,6 +21,9 @@ System.register(["angular2/core", "./search.component", "../services/search.serv
             },
             function (http_1_1) {
                 http_1 = http_1_1;
+            },
+            function (OverlayDirective_1_1) {
+                OverlayDirective_1 = OverlayDirective_1_1;
             }
         ],
         execute: function () {
@@ -34,7 +37,7 @@ System.register(["angular2/core", "./search.component", "../services/search.serv
                     selector: 'my-app',
                     templateUrl: 'app/html/header.html',
                     template: '<search></search>',
-                    directives: [search_component_1.SearchComponent],
+                    directives: [search_component_1.SearchComponent, OverlayDirective_1.OverlayDirective],
                     providers: [search_service_1.SearchService, http_1.HTTP_PROVIDERS]
                 })
             ], AppComponent);

@@ -85,7 +85,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         height: 500
                     };
                     var fill = D33.scaleOrdinal(D33.schemeCategory20);
-                    console.log('words', JSON.stringify(words));
+                    // console.log('words',JSON.stringify(words));
                     var wC = D33.select('#wCSVG');
                     wC.select('g').remove();
                     wC = wC.append("g")
@@ -102,6 +102,17 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         return d.text;
                     });
                 };
+                SearchComponent.prototype.openOverlay = function (image) {
+                    console.log(image);
+                    this.imageOverlay.nativeElement.style.height = "100%";
+                    this.overlayImgObject.nativeElement.src = image.medium;
+                    this.overlayImgObject.nativeElement.alt = image.desc;
+                    this.overlayShowOrig.nativeElement.href = image.big;
+                    this.overlaySaveOrig.nativeElement.href = image.big;
+                };
+                SearchComponent.prototype.closeOverlay = function () {
+                    this.imageOverlay.nativeElement.style.height = "0%";
+                };
                 return SearchComponent;
             }());
             __decorate([
@@ -112,6 +123,22 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 core_1.ViewChild('wClouddd'),
                 __metadata("design:type", Object)
             ], SearchComponent.prototype, "canvasH", void 0);
+            __decorate([
+                core_1.ViewChild('imgOverlay'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "imageOverlay", void 0);
+            __decorate([
+                core_1.ViewChild('overlayImgObject'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "overlayImgObject", void 0);
+            __decorate([
+                core_1.ViewChild('overlayShowOrig'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "overlayShowOrig", void 0);
+            __decorate([
+                core_1.ViewChild('overlaySaveOrig'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "overlaySaveOrig", void 0);
             SearchComponent = __decorate([
                 core_1.Component({
                     selector: 'search',

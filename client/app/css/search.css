@@ -1,8 +1,3 @@
-
-div {
-  font-size: 0;
-}
-
 .aImg {
   font-size: 16px;
   display: inline-block;
@@ -10,6 +5,7 @@ div {
   width: calc(50% - 4px);
   margin-right: 8px;
   height: 200px;
+  cursor: pointer;
 }
 
 figure {
@@ -17,25 +13,25 @@ figure {
   height: inherit;
 }
 
-img {
-  max-width: 200px;
-  max-height: 200px;
+.result-area img {
+  max-width: inherit;
+  max-height: inherit;
 }
 
-a:nth-of-type(2n) {
+.result-area a:nth-of-type(2n) {
   margin-right: 0;
 }
 
 @media screen and (min-width: 50em) {
-  a {
+  .result-area a {
     width: calc(25% - 6px);
   }
 
-  a:nth-of-type(2n) {
+  .result-area a:nth-of-type(2n) {
     margin-right: 8px;
   }
 
-  a:nth-of-type(4n) {
+  .result-area a:nth-of-type(4n) {
     margin-right: 0;
   }
 }
@@ -43,4 +39,50 @@ a:nth-of-type(2n) {
 .navbar {
   margin-bottom: 0;
   border-radius: 0;
+}
+
+
+.imgoverlay{
+height: 0%;
+width: 100%;
+background-color: rgb(0, 0, 0);
+background-color: rgba(0, 0, 0, 0.8);
+z-index: 1;
+left: 0;
+top: 0;
+position: fixed;
+overflow-y: hidden;
+transition: 0.4s;
+}
+
+.overlaycontent{
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+}
+
+.overlaycontent img{
+  max-width: 720px;
+  max-height: 540px;
+}
+
+.overlaycontent a{
+  background-color: inherit;
+  font-size: 40px;
+  transition: 0.3s;
+  display: block;
+  color: rgba(255,255,255,0.75);
+  cursor: pointer;
+}
+
+.imgoverlay .closebtn {
+    position: absolute;
+    top: 20px;
+    right: 50px;
+    font-size: 60px;
+    color: rgba(255,255,255,0.75);
+}
+.imgoverlay a:hover{
+    color: rgba(255,255,255,1);
 }

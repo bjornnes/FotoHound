@@ -11,7 +11,7 @@ var words=[];
 
 
 router.get('/words', function(req, res, next){
-  var searchQuery = req.query.searchQuery.toLowerCase();
+  var searchQuery = req.query.searchQuery.toLowerCase().trim();
   var machineLearning = req.query.machineLearning;
   var language = req.query.language;
   server.notify('searchquery', ''+searchQuery);
