@@ -50,10 +50,8 @@ export class SearchComponent{
   }
 
   ngAfterViewInit(){
-    //this._htmlElement = this._element.nativeElement;
-    //this._host = D33.select(this.div.nativeElement);
+    this.overlaySvgObject.nativeElement.style.display="none";
     console.log('initiated view', this.svgen);
-    //this.langSelector.nativeElement.selectpicker();
     $('.selectpicker').selectpicker();
     this.svgSize = {
       width: 500,
@@ -147,13 +145,14 @@ export class SearchComponent{
   public openCloudOverlay(){
     console.log(this.svgen);
     this.cloudOverlay.nativeElement.style.height = "100%";
-    this.svgen.nativeElement.style.height="60%";
+    this.overlaySvgObject.nativeElement.style.display="inline-block";
     this.overlaySvgObject.nativeElement.children[0].innerHTML= this.svgen.nativeElement.children[0].innerHTML;
+    console.log(this.svgen);
   }
 
   public closeCloudOverlay(){
     this.cloudOverlay.nativeElement.style.height = "0%";
-    this.svgen.nativeElement.style.height = "0%";
+    this.overlaySvgObject.nativeElement.style.display="none";
   }
 
 }
