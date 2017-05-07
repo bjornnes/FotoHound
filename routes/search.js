@@ -21,7 +21,7 @@ router.get('/words', function(req, res, next){
   var searchWord = {'word': searchQuery, 'prob': 2.00};
   if(machineLearning == 'true'){
     //Send to ML-interface
-    var lang = (language=='true')? 'eng' : 'nor';
+    var lang = (language=='English')? 'eng' : 'nor';
     relate.findRelatedWords(searchQuery, lang, function(result){
       result[result.length]=searchWord; //Regular JSON array used to construct word cloud
       //result[1][searchWord.word]=searchWord;  //Hashmap of words containing a JSON object used for search and sorting etc.

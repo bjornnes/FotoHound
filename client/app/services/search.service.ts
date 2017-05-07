@@ -14,7 +14,7 @@ export class SearchService{
     this.params = new URLSearchParams();
   }
 
-  words(search: string, machineLearning: boolean, language: boolean){
+  words(search: string, machineLearning: boolean, language: string){
     this.params.set('searchQuery', search);
     this.params.set('machineLearning', machineLearning);
     this.params.set('language', language);

@@ -2,9 +2,7 @@
   font-size: 16px;
   display: inline-block;
   margin-bottom: 8px;
-  width: calc(50% - 4px);
   margin-right: 8px;
-  height: 200px;
   cursor: pointer;
 }
 
@@ -13,27 +11,14 @@ figure {
   height: inherit;
 }
 
+.result-area{
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
 .result-area img {
   max-width: inherit;
   max-height: inherit;
-}
-
-.result-area a:nth-of-type(2n) {
-  margin-right: 0;
-}
-
-@media screen and (min-width: 50em) {
-  .result-area a {
-    width: calc(25% - 6px);
-  }
-
-  .result-area a:nth-of-type(2n) {
-    margin-right: 8px;
-  }
-
-  .result-area a:nth-of-type(4n) {
-    margin-right: 0;
-  }
 }
 
 .navbar {
@@ -42,7 +27,7 @@ figure {
 }
 
 
-.imgoverlay{
+.overlay{
 height: 0%;
 width: 100%;
 background-color: rgb(0, 0, 0);
@@ -76,13 +61,30 @@ transition: 0.4s;
   cursor: pointer;
 }
 
-.imgoverlay .closebtn {
+.overlay .closebtn {
     position: absolute;
     top: 20px;
     right: 50px;
     font-size: 60px;
     color: rgba(255,255,255,0.75);
 }
-.imgoverlay a:hover{
+.overlay a:hover{
     color: rgba(255,255,255,1);
+}
+
+.wordCloud{
+  float: right;
+  max-width: 20%;
+  max-height: 20%;
+}
+
+.wordCloud svg{
+  float: right;
+  width: 80%;
+  height: 80%;
+}
+
+.overlaycontent svg{
+  position: fixed;
+  width: 60%;
 }
