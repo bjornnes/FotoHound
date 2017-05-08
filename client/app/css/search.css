@@ -85,7 +85,7 @@ transition: 0.4s;
 }
 
 .overlaycontent svg{
-  float: right;
+  top: -10%;
   width: 40%;
   height: 60%;
 }
