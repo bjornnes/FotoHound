@@ -5,9 +5,10 @@ import {Observable} from 'rxjs/Observable';
 import * as D3 from '../../node_modules/d3-cloud/build/d3.layout.cloud.js';
 import * as D33 from '../../node_modules/d3/build/d3.js';
 //import Canvas from '../../node_modules/canvas/lib/canvas.js'
+import * as jQueryy from "../../bower_components/jquery/dist/jquery.js";
+import "../../bower_components/bootstrap/dist/js/bootstrap.js";
 
-
-declare let d3:any;
+declare let $ : any;
 
 
 @Component({
@@ -21,6 +22,11 @@ export class SearchComponent{
   @ViewChild('overlayImgObject') private overlayImgObject;
   @ViewChild('overlayShowOrig') private overlayShowOrig;
   @ViewChild('overlaySaveOrig') private overlaySaveOrig;
+  @ViewChild('language') private langSelector;
+  @ViewChild('overlaySvgObject') private overlaySvgObject;
+  @ViewChild('cloudOverlay') private cloudOverlay;
+  @ViewChild('svgen') private svgen;
+
   private searchField;
   private machineLearning;
   public result: Result[];
@@ -44,9 +50,9 @@ export class SearchComponent{
   }
 
   ngAfterViewInit(){
-    //this._htmlElement = this._element.nativeElement;
-    //this._host = D33.select(this.div.nativeElement);
-    console.log('initiated view');
+    this.overlaySvgObject.nativeElement.style.display="none";
+    console.log('initiated view', this.svgen);
+    $('.selectpicker').selectpicker();
     this.svgSize = {
       width: 500,
       height: 500
@@ -59,7 +65,7 @@ export class SearchComponent{
           .attr("transform", "translate(" + this.svgSize.width / 2 + "," + this.svgSize.height / 2 + ")");
   }
 
-  search(search: string, machineLearning: boolean, language: boolean){
+  search(search: string, machineLearning: boolean, language: string){
     this.searchService.words(search, machineLearning, language).subscribe(
       wordRes => this.words = wordRes,
       error => console.log('error', error),
@@ -134,6 +140,19 @@ export class SearchComponent{
 
   public closeOverlay(){
     this.imageOverlay.nativeElement.style.height = "0%";
+  }
+
+  public openCloudOverlay(){
+    console.log(this.svgen);
+    this.cloudOverlay.nativeElement.style.height = "100%";
+    this.overlaySvgObject.nativeElement.style.display="inline-block";
+    this.overlaySvgObject.nativeElement.children[0].innerHTML= this.svgen.nativeElement.children[0].innerHTML;
+    console.log(this.svgen);
+  }
+
+  public closeCloudOverlay(){
+    this.cloudOverlay.nativeElement.style.height = "0%";
+    this.overlaySvgObject.nativeElement.style.display="none";
   }
 
 }

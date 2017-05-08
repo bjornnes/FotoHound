@@ -1,27 +1,22 @@
 <form class="well">
-  <select class="selectpicker" data-widt="fit">
+  <select #language class="selectpicker" data-width="fit" data-container="body">
+    <option data-content='<span class="flag-icon flag-icon-no"></span> Norsk'>Norwegian</option>
     <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-    <option data-content='<span class="flag-icon flag-icon-mx"></span> Español'>Español</option>
-    <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
-    <option data-content='<span class="flag-icon flag-icon-no"></span> Norwegian'>Norwegian</option>
   </select>
+  <div class="wordCloud" id="wCloud" #wCloud (click)=openCloudOverlay()>
+    <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
+    </canvas>
+    <svg #svgen id="wCSVG" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin">
+    </svg>
+  </div>
     <div class="form-group">
         <input type="text" #searchQuery placeholder="Type in searchword here..." class="form-control">
-        <button class="btn btn-block" (click)="search(searchQuery.value, machineLearning.checked, language.checked)">Search</button>
+        <button class="btn btn-block" (click)="search(searchQuery.value, machineLearning.checked, language.value)">Search</button>
         <div class="chechbox">
             <label><input type="checkbox" #machineLearning value="" checked="true"> Machine learning on/off</label>
-            <label><input type="checkbox" #language value="" checked="true"> English</label>
         </div>
-        <button class="btn btn-block" (click)="openOverlay()">Test</button>
     </div>
 </form>
-<div class="wordCloud" id="wCloud" #wCloud>
-  <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
-  </canvas>
-  <svg id="wCSVG">
-  </svg>
-</div>
-<hr>
 <div class="result-area">
     <a class="aImg" *ngFor="let element of result">
         <figure (click)="openOverlay(element)">
@@ -30,11 +25,8 @@
     </a>
 </div>
 
-<div #imgOverlay id="imgOverlay" class="imgoverlay">
-
+<div #imgOverlay id="imgOverlay" class="overlay">
   <a #closeBtn href="javascript:void(0)" (click)="closeOverlay()" class="closebtn">&times;</a>
-
-
   <div class="overlaycontent">
     <img #overlayImgObject>
     <br>
@@ -42,6 +34,16 @@
     <span><a #overlayShowOrig target="_blank">Show original image</a><a #overlaySaveOrig download>Save image</a></span>
 
   </div>
+</div>
 
-
+<div #cloudOverlay id="cloudOverlay" class="overlay">
+  <a #closeBtn href="javascript:void(0)" (click)="closeCloudOverlay()" class="closebtn">&times;</a>
+  <div class="overlaycontent">
+    <svg #overlaySvgObject viewBox="0 0 500 500" preserveAspectRatio="xMinYMin">
+      <g transform="translate(250,250)">
+      </g>
+    </svg>
+    <br>
+    <br>
+  </div>
 </div>

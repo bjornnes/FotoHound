@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../services/search.service", "../../node_modules/d3-cloud/build/d3.layout.cloud.js", "../../node_modules/d3/build/d3.js"], function (exports_1, context_1) {
+System.register(["angular2/core", "../services/search.service", "../../node_modules/d3-cloud/build/d3.layout.cloud.js", "../../node_modules/d3/build/d3.js", "../../bower_components/bootstrap/dist/js/bootstrap.js"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -24,6 +24,8 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
             },
             function (D33_1) {
                 D33 = D33_1;
+            },
+            function (_1) {
             }
         ],
         execute: function () {
@@ -37,9 +39,9 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this.machineLearning = true;
                 }
                 SearchComponent.prototype.ngAfterViewInit = function () {
-                    //this._htmlElement = this._element.nativeElement;
-                    //this._host = D33.select(this.div.nativeElement);
-                    console.log('initiated view');
+                    this.overlaySvgObject.nativeElement.style.display = "none";
+                    console.log('initiated view', this.svgen);
+                    $('.selectpicker').selectpicker();
                     this.svgSize = {
                         width: 500,
                         height: 500
@@ -113,6 +115,17 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 SearchComponent.prototype.closeOverlay = function () {
                     this.imageOverlay.nativeElement.style.height = "0%";
                 };
+                SearchComponent.prototype.openCloudOverlay = function () {
+                    console.log(this.svgen);
+                    this.cloudOverlay.nativeElement.style.height = "100%";
+                    this.overlaySvgObject.nativeElement.style.display = "inline-block";
+                    this.overlaySvgObject.nativeElement.children[0].innerHTML = this.svgen.nativeElement.children[0].innerHTML;
+                    console.log(this.svgen);
+                };
+                SearchComponent.prototype.closeCloudOverlay = function () {
+                    this.cloudOverlay.nativeElement.style.height = "0%";
+                    this.overlaySvgObject.nativeElement.style.display = "none";
+                };
                 return SearchComponent;
             }());
             __decorate([
@@ -139,6 +152,22 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 core_1.ViewChild('overlaySaveOrig'),
                 __metadata("design:type", Object)
             ], SearchComponent.prototype, "overlaySaveOrig", void 0);
+            __decorate([
+                core_1.ViewChild('language'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "langSelector", void 0);
+            __decorate([
+                core_1.ViewChild('overlaySvgObject'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "overlaySvgObject", void 0);
+            __decorate([
+                core_1.ViewChild('cloudOverlay'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "cloudOverlay", void 0);
+            __decorate([
+                core_1.ViewChild('svgen'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "svgen", void 0);
             SearchComponent = __decorate([
                 core_1.Component({
                     selector: 'search',
