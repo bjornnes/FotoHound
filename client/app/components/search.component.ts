@@ -81,7 +81,8 @@ export class SearchComponent{
   }
 
   private initCloud(){
-    var words = this.words//.slice(0,9)
+    console.log(this.words);
+    var words = this.words
         .map(d => {
           var size = (Math.log(Math.pow((d.prob)*7,70)))-80;
           (size > 100)? size = 100: size=size;

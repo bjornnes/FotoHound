@@ -63,7 +63,8 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 };
                 SearchComponent.prototype.initCloud = function () {
                     var _this = this;
-                    var words = this.words //.slice(0,9)
+                    console.log(this.words);
+                    var words = this.words
                         .map(function (d) {
                         var size = (Math.log(Math.pow((d.prob) * 7, 70))) - 80;
                         (size > 100) ? size = 100 : size = size;
