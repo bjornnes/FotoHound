@@ -3,8 +3,8 @@ var mysql = require('promise-mysql');
 //var SearchClass = require('../routes/search');
 var http = require('http');
 var options = {
-  host: 'fotoweb',
-  path: '/fotoweb/mittarkiv'
+  host: 'http://158.38.43.70:7000/fotoweb/archives/5000-reuters/',
+  path: '?120=nfl'
 };
 
 var pool = mysql.createPool({
@@ -16,7 +16,7 @@ var pool = mysql.createPool({
 });
 
 var DataHandler = function() {
-   this.data = getAllData;
+   this.data = fotowebSearch;
    this.size = getSize;
    this.insert = insertData;
 };
@@ -26,6 +26,16 @@ var DataHandler = function() {
 
 
 //Getting all data
+
+function fotowebSearch(req,res){
+  console.log('fotowebSearch');
+http.get(options, function(res) {
+  console.log("Got response: " + res.statusCode);
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+});
+}
+
 function getAllData(req, res){
   var sql = "select * from data";
 

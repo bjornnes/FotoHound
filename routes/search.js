@@ -43,7 +43,7 @@ router.get('/', function(req, res, next){
 
   for(i in words){
     if(help < words.length-1){
-      search_string += words[i].word + ' or ';
+      search_string += words[i].word + '%20or%20';
     }else{
       search_string += words[i].word;
     }
