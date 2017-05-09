@@ -1,4 +1,3 @@
-var http = require('http');
 var rp = require('request-promise');
 
 function fotowebSearch(search_string){
@@ -22,16 +21,10 @@ function fotowebSearch(search_string){
 
           json_output[i] = {desc : meta, small : prev_200, medium : prev_1600 , big : prev_2400};
         }
-          console.log(json_output);
-
-
-
-        //console.log('User has %d repos', repos.toString());
       })
       .catch(function (err) {
         console.log('Failed: ' + err);
           // API call failed...
       });
 }
-
 exports.fotowebSearch = fotowebSearch;
