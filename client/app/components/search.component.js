@@ -35,14 +35,11 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this._element = _element;
                     this.usedWords = '';
                     this.remainingWords = '';
-                    this.searchField = "";
-                    this.machineLearning = true;
                 }
                 SearchComponent.prototype.ngAfterViewInit = function () {
                     this.overlaySvgObject.nativeElement.style.height = "0%";
                     this.overlaySvgObject.nativeElement.style.width = "0%";
                     this.overlaySvgObject.nativeElement.style.float = "right";
-                    console.log('initiated view');
                     $('.selectpicker').selectpicker();
                     $('#mlToggle').bootstrapToggle();
                     this.svgSize = {
@@ -54,6 +51,12 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         .attr("height", this.svgSize.height)
                         .append("g")
                         .attr("transform", "translate(" + this.svgSize.width / 2 + "," + this.svgSize.height / 2 + ")");
+                    var loadingContent = false;
+                    $(window).scroll(function () {
+                        if (!loadingContent && ($(window).scrollTop() > $(document).height - $(window).height() - 100)) {
+                            console.log('loading');
+                        }
+                    });
                 };
                 SearchComponent.prototype.search = function (search, machineLearning, language) {
                     var _this = this;
@@ -62,8 +65,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         // this.usedWords = this.words.slice(0,9);
                         // this.remainingWords = this.words.slice(10);
                         _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.result = searchRes; }, function (error) { return console.log('error', error); }, function () { return console.log(_this.result); });
-                        if (_this.words.length == 1) {
-                            console.log('not in vocab');
+                        if (_this.words.length == 1 && machineLearning) {
                             _this.alertbanner.nativeElement.style.height = "inherit";
                             _this.alertbanner.nativeElement.style.padding = "20px";
                         }
@@ -71,7 +73,6 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 };
                 SearchComponent.prototype.initCloud = function () {
                     var _this = this;
-                    console.log(this.words);
                     var words = this.words
                         .map(function (d) {
                         var size = (Math.log(Math.pow((d.prob) * 7, 70))) - 80;
@@ -114,7 +115,6 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     });
                 };
                 SearchComponent.prototype.openOverlay = function (image) {
-                    console.log(image);
                     this.imageOverlay.nativeElement.style.height = "100%";
                     this.overlayImgObject.nativeElement.src = image.medium;
                     this.overlayImgObject.nativeElement.alt = image.desc;
@@ -125,13 +125,11 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this.imageOverlay.nativeElement.style.height = "0%";
                 };
                 SearchComponent.prototype.openCloudOverlay = function () {
-                    console.log(this.overlaySvgObject);
                     this.cloudOverlay.nativeElement.style.height = "100%";
                     this.overlaySvgObject.nativeElement.style.width = "40%";
                     this.overlaySvgObject.nativeElement.style.height = "60%";
                     this.overlaySvgObject.nativeElement.style.float = "";
                     this.overlaySvgObject.nativeElement.children[0].innerHTML = this.svgen.nativeElement.children[0].innerHTML;
-                    console.log(this.overlaySvgObject);
                 };
                 SearchComponent.prototype.closeCloudOverlay = function () {
                     this.cloudOverlay.nativeElement.style.height = "0%";
@@ -142,6 +140,9 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 SearchComponent.prototype.closeAlert = function () {
                     this.alertbanner.nativeElement.style.height = "0%";
                     this.alertbanner.nativeElement.style.padding = "0px";
+                };
+                SearchComponent.prototype.onScroll = function () {
+                    console.log('scroll');
                 };
                 return SearchComponent;
             }());

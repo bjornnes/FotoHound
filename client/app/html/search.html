@@ -1,42 +1,42 @@
+
 <div #alertbanner class="overlay" id="alertbanner">
   <span><a href="javascript:void(0)" (click)="closeAlert()" class="closebtn">&times;</a>
   Could not find word in vocabulary. Searching only for *searchword* instead.</span>
 </div>
 
+<div class="wordCloud" id="wCloud" #wCloud (click)=openCloudOverlay()>
+  <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
+  </canvas>
+  <svg #svgen id="wCSVG" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin">
+  </svg>
+</div>
 
 <div class="search-area">
-  <!---
-  <div class="wordCloud" id="wCloud" #wCloud (click)=openCloudOverlay()>
-    <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
-    </canvas>
-    <svg #svgen id="wCSVG" viewBox="0 0 500 500" preserveAspectRatio="xMinYMin">
-    </svg>
-  </div>
--->
-
-  <img src="../../logo/fotohound_logo_cropped.svg">
-    <div class="">
+    <img src="../../logo/fotohound_logo2.svg">
+    <div id="search-inputs">
         <input type="text" #searchQuery placeholder="Type in searchword here..." class="search-input">
         <button class="search-button" (click)="search(searchQuery.value, machineLearning.checked, language.value)"></button>
+    </div>
         <div class="checkbox">
           <label>
-            <input id="mlToggle" type="checkbox" #machineLearning data-toggle="toggle" data-onstyle="success" data-offstyle="danger" value="" checked="true"> Machine learning on/off
+             <input id="mlToggle" type="checkbox" #machineLearning data-toggle="toggle" data-onstyle="success" data-offstyle="danger" value="" checked="true">Machine learning
           </label>
         </div>
+        <div class="langbox">
         <select #language class="selectpicker" data-width="fit" data-container="body">
           <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
           <option data-content='<span class="flag-icon flag-icon-no"></span> Norsk'>Norwegian</option>
         </select>
-    </div>
+      </div>
 </div>
 <div class="result-area">
+  <hr>
     <a class="aImg" *ngFor="let element of result">
         <figure (click)="openOverlay(element)">
             <img #img src="{{element.small}}" alt="{{element.desc}}" title="{{element.desc}}" >
         </figure>
     </a>
 </div>
-
 <div #imgOverlay id="imgOverlay" class="overlay">
   <a href="javascript:void(0)" (click)="closeOverlay()" class="closebtn">&times;</a>
   <div class="overlaycontent">
