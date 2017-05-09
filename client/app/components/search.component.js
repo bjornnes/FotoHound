@@ -39,9 +39,12 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this.machineLearning = true;
                 }
                 SearchComponent.prototype.ngAfterViewInit = function () {
-                    this.overlaySvgObject.nativeElement.style.display = "none";
-                    console.log('initiated view', this.svgen);
+                    this.overlaySvgObject.nativeElement.style.height = "0%";
+                    this.overlaySvgObject.nativeElement.style.width = "0%";
+                    this.overlaySvgObject.nativeElement.style.float = "right";
+                    console.log('initiated view');
                     $('.selectpicker').selectpicker();
+                    $('#mlToggle').bootstrapToggle();
                     this.svgSize = {
                         width: 500,
                         height: 500
@@ -56,9 +59,14 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     var _this = this;
                     this.searchService.words(search, machineLearning, language).subscribe(function (wordRes) { return _this.words = wordRes; }, function (error) { return console.log('error', error); }, function () {
                         _this.initCloud();
-                        _this.usedWords = _this.words.slice(0, 9);
-                        _this.remainingWords = _this.words.slice(10);
+                        // this.usedWords = this.words.slice(0,9);
+                        // this.remainingWords = this.words.slice(10);
                         _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.result = searchRes; }, function (error) { return console.log('error', error); }, function () { return console.log(_this.result); });
+                        if (_this.words.length == 1) {
+                            console.log('not in vocab');
+                            _this.alertbanner.nativeElement.style.height = "inherit";
+                            _this.alertbanner.nativeElement.style.padding = "20px";
+                        }
                     });
                 };
                 SearchComponent.prototype.initCloud = function () {
@@ -117,15 +125,23 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this.imageOverlay.nativeElement.style.height = "0%";
                 };
                 SearchComponent.prototype.openCloudOverlay = function () {
-                    console.log(this.svgen);
+                    console.log(this.overlaySvgObject);
                     this.cloudOverlay.nativeElement.style.height = "100%";
-                    this.overlaySvgObject.nativeElement.style.display = "inline-block";
+                    this.overlaySvgObject.nativeElement.style.width = "40%";
+                    this.overlaySvgObject.nativeElement.style.height = "60%";
+                    this.overlaySvgObject.nativeElement.style.float = "";
                     this.overlaySvgObject.nativeElement.children[0].innerHTML = this.svgen.nativeElement.children[0].innerHTML;
-                    console.log(this.svgen);
+                    console.log(this.overlaySvgObject);
                 };
                 SearchComponent.prototype.closeCloudOverlay = function () {
                     this.cloudOverlay.nativeElement.style.height = "0%";
-                    this.overlaySvgObject.nativeElement.style.display = "none";
+                    this.overlaySvgObject.nativeElement.style.height = "0%";
+                    this.overlaySvgObject.nativeElement.style.width = "0%";
+                    this.overlaySvgObject.nativeElement.style.float = "right";
+                };
+                SearchComponent.prototype.closeAlert = function () {
+                    this.alertbanner.nativeElement.style.height = "0%";
+                    this.alertbanner.nativeElement.style.padding = "0px";
                 };
                 return SearchComponent;
             }());
@@ -169,6 +185,10 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 core_1.ViewChild('svgen'),
                 __metadata("design:type", Object)
             ], SearchComponent.prototype, "svgen", void 0);
+            __decorate([
+                core_1.ViewChild('alertbanner'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "alertbanner", void 0);
             SearchComponent = __decorate([
                 core_1.Component({
                     selector: 'search',

@@ -26,6 +26,8 @@ export class SearchComponent{
   @ViewChild('overlaySvgObject') private overlaySvgObject;
   @ViewChild('cloudOverlay') private cloudOverlay;
   @ViewChild('svgen') private svgen;
+  @ViewChild('alertbanner') private alertbanner;
+
 
   private searchField;
   private machineLearning;
@@ -50,9 +52,12 @@ export class SearchComponent{
   }
 
   ngAfterViewInit(){
-    this.overlaySvgObject.nativeElement.style.display="none";
-    console.log('initiated view', this.svgen);
+    this.overlaySvgObject.nativeElement.style.height = "0%";
+    this.overlaySvgObject.nativeElement.style.width = "0%";
+    this.overlaySvgObject.nativeElement.style.float="right";
+    console.log('initiated view');
     $('.selectpicker').selectpicker();
+    $('#mlToggle').bootstrapToggle();
     this.svgSize = {
       width: 500,
       height: 500
@@ -71,11 +76,17 @@ export class SearchComponent{
       error => console.log('error', error),
       () => {
         this.initCloud();
-        this.usedWords = this.words.slice(0,9);
-        this.remainingWords = this.words.slice(10);
+        // this.usedWords = this.words.slice(0,9);
+        // this.remainingWords = this.words.slice(10);
         this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes,
           error => console.log('error',error),
-          () => console.log(this.result));
+          () => console.log(this.result)
+        );
+        if(this.words.length == 1){
+            console.log('not in vocab');
+            this.alertbanner.nativeElement.style.height = "inherit";
+            this.alertbanner.nativeElement.style.padding = "20px";
+        }
       }
   );
   }
@@ -144,16 +155,25 @@ export class SearchComponent{
   }
 
   public openCloudOverlay(){
-    console.log(this.svgen);
+    console.log(this.overlaySvgObject);
     this.cloudOverlay.nativeElement.style.height = "100%";
-    this.overlaySvgObject.nativeElement.style.display="inline-block";
+    this.overlaySvgObject.nativeElement.style.width="40%";
+    this.overlaySvgObject.nativeElement.style.height="60%";
+    this.overlaySvgObject.nativeElement.style.float="";
     this.overlaySvgObject.nativeElement.children[0].innerHTML= this.svgen.nativeElement.children[0].innerHTML;
-    console.log(this.svgen);
+    console.log(this.overlaySvgObject);
   }
 
   public closeCloudOverlay(){
     this.cloudOverlay.nativeElement.style.height = "0%";
-    this.overlaySvgObject.nativeElement.style.display="none";
+    this.overlaySvgObject.nativeElement.style.height="0%";
+    this.overlaySvgObject.nativeElement.style.width="0%";
+    this.overlaySvgObject.nativeElement.style.float="right";
+  }
+
+  public closeAlert(){
+    this.alertbanner.nativeElement.style.height = "0%";
+    this.alertbanner.nativeElement.style.padding = "0px";
   }
 
 }
