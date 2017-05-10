@@ -73,6 +73,7 @@ export class SearchComponent{
   }
 
   search(search: string, machineLearning: boolean, language: string){
+    this.closeAlert();
     this.searchService.words(search, machineLearning, language).subscribe(
       wordRes => this.words = wordRes,
       error => console.log('error', error),

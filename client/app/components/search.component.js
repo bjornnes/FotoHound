@@ -60,6 +60,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 };
                 SearchComponent.prototype.search = function (search, machineLearning, language) {
                     var _this = this;
+                    this.closeAlert();
                     this.searchService.words(search, machineLearning, language).subscribe(function (wordRes) { return _this.words = wordRes; }, function (error) { return console.log('error', error); }, function () {
                         _this.initCloud();
                         // this.usedWords = this.words.slice(0,9);

@@ -15,7 +15,7 @@ figure {
   __padding-left: 2%;
   __padding-right: 2%;
   margin-bottom: 5%;
-  background-color: #666666;
+  background-color: #9B9B9B;
   text-align: center;
 }
 
@@ -77,14 +77,12 @@ transition: 0.4s;
 
 .wordCloud{
   float: right;
-  max-width: 20%;
-  max-height: 20%;
 }
 
 .wordCloud svg{
   float: right;
-  width: 80%;
-  height: 80%;
+  width: 35%;
+  height: 18%;
 }
 
 .overlaycontent svg{
@@ -97,7 +95,7 @@ transition: 0.4s;
 #alertbanner {
   height: 0%;
   text-align: center;
-  background-color: #ff9800;
+  background-color: #f7786b;
   color: #FFFFFF;
   padding: 0px;
   font-size: 18px;
@@ -128,6 +126,7 @@ transition: 0.4s;
 }
 
 .search-area img{
+  margin-top: 13px;
   margin-bottom: 50px;
   width: 80%;
 }
@@ -135,7 +134,7 @@ transition: 0.4s;
 .search-input, .search-button{
   height: 52px;
   border-radius: 6px;
-  __box-shadow: 3px 3px 4px #888888;
+  __box-shadow: 3px 3px 4px #9B9B9B;
 }
 
 .search-input{

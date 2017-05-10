@@ -1,7 +1,7 @@
 
 <div #alertbanner class="overlay" id="alertbanner">
   <span><a href="javascript:void(0)" (click)="closeAlert()" class="closebtn">&times;</a>
-  Could not find word in vocabulary. Searching only for *searchword* instead.</span>
+  Could not find word in vocabulary. Searching only for {{searchQuery.value}} instead.</span>
 </div>
 
 <div class="wordCloud" id="wCloud" #wCloud (click)=openCloudOverlay()>
@@ -12,9 +12,9 @@
 </div>
 
 <div class="search-area">
-    <img src="../../logo/fotohound_logo2.svg">
+    <img src="../../logo/fh_logo.svg">
     <div id="search-inputs">
-        <input type="text" #searchQuery placeholder="Type in searchword here..." class="search-input">
+        <input type="text" #searchQuery placeholder="Type in search word here..." class="search-input" name="searchQuery" (keyup.enter)="search(searchQuery.value, machineLearning.checked, language.value)">
         <button class="search-button" (click)="search(searchQuery.value, machineLearning.checked, language.value)"></button>
     </div>
         <div class="checkbox">
