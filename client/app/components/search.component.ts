@@ -26,9 +26,9 @@ export class SearchComponent{
   @ViewChild('overlaySvgObject') private overlaySvgObject;
   @ViewChild('cloudOverlay') private cloudOverlay;
   @ViewChild('svgen') private svgen;
+  @ViewChild('alertbanner') private alertbanner;
 
-  private searchField;
-  private machineLearning;
+
   public result: Result[];
   private words;
   private usedWords = '';
@@ -45,14 +45,14 @@ export class SearchComponent{
 
 
   constructor(private searchService: SearchService, private _element: ElementRef){
-    this.searchField = "";
-    this.machineLearning = true;
   }
 
   ngAfterViewInit(){
-    this.overlaySvgObject.nativeElement.style.display="none";
-    console.log('initiated view', this.svgen);
+    this.overlaySvgObject.nativeElement.style.height = "0%";
+    this.overlaySvgObject.nativeElement.style.width = "0%";
+    this.overlaySvgObject.nativeElement.style.float="right";
     $('.selectpicker').selectpicker();
+    $('#mlToggle').bootstrapToggle();
     this.svgSize = {
       width: 500,
       height: 500
@@ -63,25 +63,37 @@ export class SearchComponent{
           .attr("height", this.svgSize.height)
         .append("g")
           .attr("transform", "translate(" + this.svgSize.width / 2 + "," + this.svgSize.height / 2 + ")");
+
+    var loadingContent = false;
+    $(window).scroll(()=>{
+      if(!loadingContent && ($(window).scrollTop() > $(document).height-$(window).height() - 100)){
+          console.log('loading');
+      }
+    });
   }
 
   search(search: string, machineLearning: boolean, language: string){
+    this.closeAlert();
     this.searchService.words(search, machineLearning, language).subscribe(
       wordRes => this.words = wordRes,
       error => console.log('error', error),
       () => {
         this.initCloud();
-        this.usedWords = this.words.slice(0,9);
-        this.remainingWords = this.words.slice(10);
+        // this.usedWords = this.words.slice(0,9);
+        // this.remainingWords = this.words.slice(10);
         this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes,
           error => console.log('error',error),
-          () => console.log(this.result));
+          () => console.log(this.result)
+        );
+        if(this.words.length == 1 && machineLearning){
+            this.alertbanner.nativeElement.style.height = "inherit";
+            this.alertbanner.nativeElement.style.padding = "20px";
+        }
       }
   );
   }
 
   private initCloud(){
-    console.log(this.words);
     var words = this.words
         .map(d => {
           var size = (Math.log(Math.pow((d.prob)*7,70)))-80;
@@ -131,7 +143,6 @@ export class SearchComponent{
   }
 
   public openOverlay(image){
-    console.log(image);
     this.imageOverlay.nativeElement.style.height = "100%";
     this.overlayImgObject.nativeElement.src = image.medium;
     this.overlayImgObject.nativeElement.alt = image.desc;
@@ -144,16 +155,27 @@ export class SearchComponent{
   }
 
   public openCloudOverlay(){
-    console.log(this.svgen);
     this.cloudOverlay.nativeElement.style.height = "100%";
-    this.overlaySvgObject.nativeElement.style.display="inline-block";
+    this.overlaySvgObject.nativeElement.style.width="40%";
+    this.overlaySvgObject.nativeElement.style.height="60%";
+    this.overlaySvgObject.nativeElement.style.float="";
     this.overlaySvgObject.nativeElement.children[0].innerHTML= this.svgen.nativeElement.children[0].innerHTML;
-    console.log(this.svgen);
   }
 
   public closeCloudOverlay(){
     this.cloudOverlay.nativeElement.style.height = "0%";
-    this.overlaySvgObject.nativeElement.style.display="none";
+    this.overlaySvgObject.nativeElement.style.height="0%";
+    this.overlaySvgObject.nativeElement.style.width="0%";
+    this.overlaySvgObject.nativeElement.style.float="right";
+  }
+
+  public closeAlert(){
+    this.alertbanner.nativeElement.style.height = "0%";
+    this.alertbanner.nativeElement.style.padding = "0px";
+  }
+
+  public onScroll(){
+    console.log('scroll');
   }
 
 }
