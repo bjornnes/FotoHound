@@ -60,6 +60,7 @@ router.get('/', function(req, res, next){
     console.log('search_string', search_string);
     searchEngine.fotowebSearch(search_string,function(hits){
       var test = hits;
+      console.log(hits);
       rank.rank(words, test, function(sorted){
         res.send(sorted);
       });
