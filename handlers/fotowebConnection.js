@@ -4,30 +4,6 @@ var serverIP = "http://158.38.43.70";
 
 var paging_array = ['','&p=1','&p=2','&p=3','&p=4','&p=5','&p=6','&p=7'];
 
-function fotowebConnection(string ,paging, callback){
-  var url;
-
-  if(paging){
-    url = 'http://158.38.43.70' + string;
-  }else{
-    url = 'http://158.38.43.70/fotoweb/archives/5000-reuters/?120=soccer';
-  }
-  var options = {
-      uri: url,
-      json: true // Automatically parses the JSON string in the response
-  };
-  rp(options)
-      .then(function (repos) {
-        var json_res = JSON.stringify(repos);
-        var res = JSON.parse(json_res);
-        callback(res);
-    })
-    .catch(function (err) {
-      console.log('fotoweb connection failed: ' + err);
-        // API call failed...
-    });
-}
-
 function fotowebConn(search_string, j, callback){
 
     var json_output = [];

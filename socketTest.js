@@ -6,6 +6,7 @@ var relate = require('./handlers/queryHandler');
 
 var client = new zerorpc.Client();
 client.connect("tcp://158.38.43.76:4242");
+
 function norwegianWord(input, callback){
 
   client.invoke("norwegianSocket", input, function(error, res, more) {

@@ -20,11 +20,9 @@ class SocketServer(object):
         #model.most_similar
         print (name)
         #return json
-<<<<<<< HEAD
         return  word2vec_model.most_similar(name) + fasttext_model.most_similar(name)
 
 s = zerorpc.Server(HelloRPC())
-=======
         return  word2vec_model_NO.most_similar(name) + fasttext_model_NO.most_similar(name)
 
     def englishSocket(self, name):
@@ -32,7 +30,6 @@ s = zerorpc.Server(HelloRPC())
         return  word2vec_model_ENG.most_similar(name) + fasttext_model_ENG.most_similar(name)
 
 s = zerorpc.Server(SocketServer())
->>>>>>> ace8c283cc89284270624c1a2d3a5b402799d0d3
 s.bind("tcp://158.38.43.76:4242")
 s.run()
 
