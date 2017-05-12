@@ -3,17 +3,17 @@ var zerorpc = require("zerorpc");
 var client = new zerorpc.Client();
 client.connect("tcp://158.38.43.76:4242");
 
-function norwegianWord(input, callback){
+function norwegianWord(pos, neg, callback){
 
-  client.invoke("norwegianSocket", input, function(error, res, more) {
+  client.invoke("norwegianSocket", pos, neg, function(error, res, more) {
       callback(res);
       // client.close();
   });
 }
 
-function englishWord(input, callback){
+function englishWord(pos, neg, callback){
 
-  client.invoke("englishSocket", input, function(error, res, more) {
+  client.invoke("englishSocket", pos, neg, function(error, res, more) {
       callback(res);
       // client.close();
   });

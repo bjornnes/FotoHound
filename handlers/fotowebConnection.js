@@ -43,10 +43,10 @@ exports.fotowebSearch = fotowebSearch;
 function fotowebSearch(searchWord,callback){
   var res = new Array();
   fotowebConn(searchWord, true, 0, function(hits){
-    console.log(hits);
+    console.log('hits',hits);
     var pages = (hits > 175)? 8 : Math.floor((hits/25)+1);
     //var pages = Math.floor((hits/25)+1);
-    console.log(pages);
+    console.log('pages',pages);
     for (var j = 0; j < pages; j++) {
           fotowebConn(searchWord, false, j, function(out){
           res.push(out);

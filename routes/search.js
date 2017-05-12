@@ -19,10 +19,23 @@ router.get('/words', function(req, res, next){
   // var words = [];
   // words[0] = {'word': searchQuery, 'prob': 2.00};
   var searchWord = {'word': searchQuery, 'prob': 2.00};
+  var searchArray =  searchQuery.split(/[\s]+/);
+  var pos = [];
+  var neg = [];
+  for (var i = 0; i < searchArray.length; i++) {
+    if(searchArray[i].charAt(0) == '-'){
+      neg[neg.length] = searchArray[i].replace('-','');
+    }else{
+      pos[pos.length] = searchArray[i];
+    }
+  }
+
+  console.log('pos', pos);
+  console.log('neg', neg);
   if(machineLearning == 'true'){
     //Send to ML-interface
     var lang = (language=='English')? 'eng' : 'nor';
-    relate.findRelatedWords(searchQuery, lang, function(result){
+    relate.findRelatedWords(pos, neg, lang, function(result){
       result[result.length]=searchWord; //Regular JSON array used to construct word cloud
       //result[1][searchWord.word]=searchWord;  //Hashmap of words containing a JSON object used for search and sorting etc.
       //console.log('2d',result[1]);
