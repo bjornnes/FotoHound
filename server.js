@@ -9,7 +9,6 @@ var http = require('http');
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
-var DataHandler = require('./handlers/DataHandler');
 
 var hskey = fs.readFileSync('./sslcert/server.key');
 var hscert = fs.readFileSync('./sslcert/server.cert');
@@ -17,7 +16,6 @@ var hscert = fs.readFileSync('./sslcert/server.cert');
 //Set routes
 var index = require('./routes/index');
 var search = require('./routes/search');
-var imageRest = require('./routes/imageRest');
 
 //Initiate express
 var app = module.exports = express();
@@ -34,11 +32,6 @@ app.use(express.static(path.join(__dirname, 'images')));   //Folder for images
 //Body parser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-
-//Set up data handler
-var handlers = {
-  dataHandler : new DataHandler()
-};
 
 //Https
 var credentials = {
@@ -57,8 +50,6 @@ var https_server = https.createServer(credentials, app);
 //Set URL-routes
 app.use('/', index);
 app.use('/search', search);
-//app.use('/data', imageRest);
-imageRest.setup(app, handlers);
 
 var server=https_server.listen(PORT, () => {
     var host = server.address().address;

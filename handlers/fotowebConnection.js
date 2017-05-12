@@ -4,7 +4,7 @@ var serverIP = "http://158.38.43.70";
 
 var paging_array = ['','&p=1','&p=2','&p=3','&p=4','&p=5','&p=6','&p=7'];
 
-function fotowebConn(search_string, j, callback){
+function fotowebConn(search_string, findPages, j, callback){
 
     var json_output = [];
     var options = {
@@ -15,19 +15,23 @@ function fotowebConn(search_string, j, callback){
       .then(function (repos) {
         var json_res = JSON.stringify(repos);
         var res = JSON.parse(json_res);
-        var metadata = res.assets.data;
-        var json_res;
-        var parsed_res;
-        for(i in metadata){
+        if(findPages){
+          var metadata = res.assetCount;
+          console.log(res.assetCount);
+          callback(metadata);
+        }else{
+          var metadata = res.assets.data;
+          for(i in metadata){
 
-          var meta = (metadata[i].metadata['120'].value);
-          var prev_200 = (metadata[i].previews[9].href);
-          var prev_1600 = (metadata[i].previews[2].href);
-          var prev_2400 = (metadata[i].previews[3].href);
+            var meta = (metadata[i].metadata['120'].value);
+            var prev_200 = (metadata[i].previews[9].href);
+            var prev_1600 = (metadata[i].previews[2].href);
+            var prev_2400 = (metadata[i].previews[3].href);
 
-          json_output[i] = {desc : meta, small : serverIP+prev_200, medium : serverIP+prev_1600 , big : serverIP+prev_2400};
+            json_output[i] = {desc : meta, small : serverIP+prev_200, medium : serverIP+prev_1600 , big : serverIP+prev_2400};
+            }
+            callback(json_output);
         }
-        callback(json_output);
       })
       .catch(function (err) {
         console.log('Failed: ' + err);
@@ -37,18 +41,20 @@ function fotowebConn(search_string, j, callback){
 exports.fotowebSearch = fotowebSearch;
 
 function fotowebSearch(searchWord,callback){
-for (var j = 0; j < paging_array.length; j++) {
   var res = new Array();
-      fotowebConn(searchWord,j, function(out){
-      res.push(out);
-      if(res.length == 8){
-        var merged = [].concat.apply([], res);
-        callback(merged);
-      }
-    });
+  fotowebConn(searchWord, true, 0, function(hits){
+    console.log(hits);
+    var pages = (hits > 175)? 8 : Math.floor((hits/25)+1);
+    //var pages = Math.floor((hits/25)+1);
+    console.log(pages);
+    for (var j = 0; j < pages; j++) {
+          fotowebConn(searchWord, false, j, function(out){
+          res.push(out);
+          if(res.length == pages){
+            var merged = [].concat.apply([], res);
+            callback(merged);
+          }
+        });
+    }
+  });
 }
-}
-
-fotowebSearch('soccer', function(array){
-  console.log(array.length);
-});

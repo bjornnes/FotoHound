@@ -1,4 +1,4 @@
-var socket = require('../socketTest');
+var socket = require('../service/clientSocket');
 
 function findRelatedWords(word, language, callback){
   word.toLowerCase();
