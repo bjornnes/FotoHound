@@ -1,7 +1,7 @@
 var chai = require('chai');
 var expect = chai.expect;
 
-var socketTest = require('../socketTest');
+var socketTest = require('../service/socketTest');
 
 // describe('#sqrt()', function() {
 //         it('should return the square root of a given positive number', function() {

@@ -21,3 +21,8 @@ function rank(words, unsorted, callback){
   callback(hits);
 }
 exports.rank = rank;
+
+
+rank([],[],function(res){
+  console.log(res);
+});
