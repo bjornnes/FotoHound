@@ -1,15 +1,14 @@
-var socket = require('../socketTest');
+var socket = require('../service/clientSocket');
 
-function findRelatedWords(word, language, callback){
-  word.toLowerCase();
+function findRelatedWords(pos, neg, language, callback){
   if (language == 'nor'){
-    socket.norwegianWord(word, function(result){
+    socket.norwegianWord(pos, neg, function(result){
       var res = mapper(result);
       res = listLogic(res);
       callback(res);
     });
   }else if(language == 'eng'){
-    socket.englishWord(word, function(result){
+    socket.englishWord(pos, neg, function(result){
       var res = mapper(result);
       res = listLogic(res);
       callback(res);
