@@ -38,17 +38,15 @@ function fotowebConn(search_string, findPages, j, callback){
           // API call failed...
       });
 }
-exports.fotowebSearch = fotowebSearch;
 
-function fotowebSearch(searchWord,callback){
+function fotowebSearch(searchString,callback){
   var res = new Array();
-  fotowebConn(searchWord, true, 0, function(hits){
+  fotowebConn(searchString, true, 0, function(hits){
     console.log('hits',hits);
     var pages = (hits > 175)? 8 : Math.floor((hits/25)+1);
-    //var pages = Math.floor((hits/25)+1);
     console.log('pages',pages);
     for (var j = 0; j < pages; j++) {
-          fotowebConn(searchWord, false, j, function(out){
+          fotowebConn(searchString, false, j, function(out){
           res.push(out);
           if(res.length == pages){
             var merged = [].concat.apply([], res);
@@ -58,3 +56,46 @@ function fotowebSearch(searchWord,callback){
     }
   });
 }
+
+function search(searchWord, machineLearning, callback){
+  var searchString='';
+  var help = 0;
+  for(i in searchWord){
+    if(help < searchWord.length-1){
+      searchString += searchWord[i].word + '%20or%20';
+    }else{
+      searchString += searchWord[i].word;
+    }
+    help++;
+  }
+  fotowebSearch(searchString, function(res){
+    if(machineLearning){
+      var ranked = rank(searchWord, res);
+      callback(ranked);
+    }else{
+      callback(res);
+    }
+  });
+}
+
+function rank(words, unsorted){
+  var hits = unsorted;
+  for(var hit in hits){
+    var score = 0;
+    hits[hit].hits =  [];
+    for(var word in words){
+      if(hits[hit].desc.toLowerCase().indexOf(words[word].word)>-1){
+        score += words[word].prob;
+        hits[hit].hits[hits[hit].hits.length] = words[word].word;
+      }
+    }
+    hits[hit].score=score;
+  }
+
+
+  hits.sort(function(a,b){
+    return b.score - a.score;
+  });
+  return hits;
+}
+exports.search = search;

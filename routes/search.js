@@ -2,11 +2,10 @@ var express = require('express');
 var router = module.exports =  express.Router();
 var server = require('../server');
 var relate = require('../handlers/queryHandler');
-var rank = require('../handlers/resultRanker');
 var Canvas = require('canvas');
 var cloud = require('d3-cloud');
 
-var searchEngine = require('../handlers/fotowebConnection');
+var searchEngine = require('../handlers/imageHandler');
 var words=[];
 
 
@@ -57,31 +56,14 @@ router.get('/', function(req, res, next){
   //   }
   // }
 
-
-  if(machineLearning == 'true'){
-    var search_string='';
-    var help = 0;
-
-    for(i in words){
-      if(help < words.length-1){
-        search_string += words[i].word + '%20or%20';
-      }else{
-        search_string += words[i].word;
-      }
-      help++;
-    }
-    console.log('search_string', search_string);
-    searchEngine.fotowebSearch(search_string,function(hits){
-      var test = hits;
-      rank.rank(words, test, function(sorted){
-        res.send(sorted.slice(0,201));
-      });
-    });
-  }else{
-    var search_string = words.word;
-    console.log('search_string', search_string);
-    searchEngine.fotowebSearch(search_string,function(hits){
+  // if(){
+    searchEngine.search(words, machineLearning == 'true',function(hits){
       res.send(hits);
     });
-  }
+  // }else{
+  //   var search_string = words.word;
+  //   searchEngine.search(words, false,function(hits){
+  //     res.send(hits);
+  //   });
+  // }
 });
