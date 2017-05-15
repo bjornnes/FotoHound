@@ -50,20 +50,7 @@ router.get('/', function(req, res, next){
   var machineLearning = 'true';
   var words = JSON.parse(req.query.words);
   console.log('searchjs',words);
-  //Hent fra Database
-  // for (var word in words) {
-  //   if (object.hasOwnProperty(word)) {
-  //   }
-  // }
-
-  // if(){
     searchEngine.search(words, machineLearning == 'true',function(hits){
       res.send(hits);
     });
-  // }else{
-  //   var search_string = words.word;
-  //   searchEngine.search(words, false,function(hits){
-  //     res.send(hits);
-  //   });
-  // }
 });
