@@ -46,7 +46,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 };
                 ;
                 SearchComponent.prototype.ngAfterViewInit = function () {
-                    this.overlaySvgObject.nativeElement.style.height = "0%";
+                    //this.overlaySvgObject.nativeElement.style.height = "0%";
                     this.overlaySvgObject.nativeElement.style.width = "0%";
                     this.overlaySvgObject.nativeElement.style.float = "right";
                     $('.selectpicker').selectpicker();
@@ -142,14 +142,14 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 };
                 SearchComponent.prototype.openCloudOverlay = function () {
                     this.cloudOverlay.nativeElement.style.height = "100%";
-                    this.overlaySvgObject.nativeElement.style.width = "40%";
-                    this.overlaySvgObject.nativeElement.style.height = "60%";
+                    this.overlaySvgObject.nativeElement.style.width = "50%";
+                    //this.overlaySvgObject.nativeElement.style.height="60%";
                     this.overlaySvgObject.nativeElement.style.float = "";
                     this.overlaySvgObject.nativeElement.children[0].innerHTML = this.svgen.nativeElement.children[0].innerHTML;
                 };
                 SearchComponent.prototype.closeCloudOverlay = function () {
                     this.cloudOverlay.nativeElement.style.height = "0%";
-                    this.overlaySvgObject.nativeElement.style.height = "0%";
+                    //this.overlaySvgObject.nativeElement.style.height="0%";
                     this.overlaySvgObject.nativeElement.style.width = "0%";
                     this.overlaySvgObject.nativeElement.style.float = "right";
                 };

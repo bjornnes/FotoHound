@@ -57,7 +57,7 @@ export class SearchComponent{
   }
 
   ngAfterViewInit(){
-    this.overlaySvgObject.nativeElement.style.height = "0%";
+    //this.overlaySvgObject.nativeElement.style.height = "0%";
     this.overlaySvgObject.nativeElement.style.width = "0%";
     this.overlaySvgObject.nativeElement.style.float="right";
     $('.selectpicker').selectpicker();
@@ -170,15 +170,15 @@ export class SearchComponent{
 
   public openCloudOverlay(){
     this.cloudOverlay.nativeElement.style.height = "100%";
-    this.overlaySvgObject.nativeElement.style.width="40%";
-    this.overlaySvgObject.nativeElement.style.height="60%";
+    this.overlaySvgObject.nativeElement.style.width="50%";
+    //this.overlaySvgObject.nativeElement.style.height="60%";
     this.overlaySvgObject.nativeElement.style.float="";
     this.overlaySvgObject.nativeElement.children[0].innerHTML= this.svgen.nativeElement.children[0].innerHTML;
   }
 
   public closeCloudOverlay(){
     this.cloudOverlay.nativeElement.style.height = "0%";
-    this.overlaySvgObject.nativeElement.style.height="0%";
+    //this.overlaySvgObject.nativeElement.style.height="0%";
     this.overlaySvgObject.nativeElement.style.width="0%";
     this.overlaySvgObject.nativeElement.style.float="right";
   }

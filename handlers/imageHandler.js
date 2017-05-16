@@ -11,7 +11,6 @@ function fotowebConn(search_string, findPages, j, callback){
         uri: 'http://158.38.43.70/fotoweb/archives/5000-reuters/?q=' + search_string + '&p=' + j,//,
         json: true // Automatically parses the JSON string in the response
     };
-    console.log(options.uri);
   rp(options)
       .then(function (repos) {
         var json_res = JSON.stringify(repos);
@@ -45,7 +44,8 @@ function fotowebSearch(searchString,callback){
   fotowebConn(searchString, true, 0, function(hits){
     console.log('hits',hits);
     // var pages = (hits > 175)? 8 : Math.floor((hits/25)+1);
-    var pages = Math.floor((hits/25)+1);
+    var pagesTemp = Math.floor((hits/25)+1);
+    var pages = (pagesTemp>100)? 100 : pagesTemp;
     console.log('pages',pages);
     for (var j = 0; j < pages; j++) {
           fotowebConn(searchString, false, j, function(out){
