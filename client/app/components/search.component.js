@@ -36,6 +36,15 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this.usedWords = '';
                     this.remainingWords = '';
                 }
+                SearchComponent.prototype.track = function (event) {
+                    var _this = this;
+                    if (!this.loading && $(window).scrollTop() >= $(document).height() - $(window).height() - 200) {
+                        this.loading = true;
+                        this.result = this.result.concat(this.allResults.slice(this.result.length, this.result.length + 80));
+                        setTimeout(function () { return _this.loading = false; }, 1000);
+                    }
+                };
+                ;
                 SearchComponent.prototype.ngAfterViewInit = function () {
                     this.overlaySvgObject.nativeElement.style.height = "0%";
                     this.overlaySvgObject.nativeElement.style.width = "0%";
@@ -51,11 +60,17 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         .attr("height", this.svgSize.height)
                         .append("g")
                         .attr("transform", "translate(" + this.svgSize.width / 2 + "," + this.svgSize.height / 2 + ")");
-                    var loadingContent = false;
-                    $(window).scroll(function () {
-                        if (!loadingContent && ($(window).scrollTop() > $(document).height - $(window).height() - 100)) {
-                            console.log('loading');
-                        }
+                    this.loading = false;
+                    // var loadingContent = false;
+                    // $(window).scroll(()=>{
+                    //   console.log('Scrolling!');
+                    //   if(!loadingContent && ($(window).scrollTop() > $(document).height-$(window).height() - 100)){
+                    //       this.result = this.allResults.splice(0,160);
+                    //       console.log(this.result.length);
+                    //   }
+                    // });
+                    $(window).on("load", function () {
+                        console.log('loaded');
                     });
                 };
                 SearchComponent.prototype.search = function (search, machineLearning, language) {
@@ -65,7 +80,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                         _this.initCloud();
                         // this.usedWords = this.words.slice(0,9);
                         // this.remainingWords = this.words.slice(10);
-                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.result = searchRes; }, function (error) { return console.log('error', error); }, function () { return console.log(_this.result); });
+                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.allResults = searchRes; }, function (error) { return console.log('error', error); }, function () { return _this.result = _this.allResults.slice(0, 80); });
                         if (_this.words.length == 1 && machineLearning) {
                             _this.alertbanner.nativeElement.style.height = "inherit";
                             _this.alertbanner.nativeElement.style.padding = "20px";
@@ -142,9 +157,6 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                     this.alertbanner.nativeElement.style.height = "0%";
                     this.alertbanner.nativeElement.style.padding = "0px";
                 };
-                SearchComponent.prototype.onScroll = function () {
-                    console.log('scroll');
-                };
                 return SearchComponent;
             }());
             __decorate([
@@ -191,6 +203,12 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 core_1.ViewChild('alertbanner'),
                 __metadata("design:type", Object)
             ], SearchComponent.prototype, "alertbanner", void 0);
+            __decorate([
+                core_1.HostListener('window:scroll', ['$event']),
+                __metadata("design:type", Function),
+                __metadata("design:paramtypes", [Object]),
+                __metadata("design:returntype", void 0)
+            ], SearchComponent.prototype, "track", null);
             SearchComponent = __decorate([
                 core_1.Component({
                     selector: 'search',

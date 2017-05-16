@@ -1,5 +1,5 @@
 
-import {Component, ElementRef, ViewChild} from 'angular2/core';
+import {Component, ElementRef, HostListener, ViewChild} from 'angular2/core';
 import {SearchService} from '../services/search.service';
 import {Observable} from 'rxjs/Observable';
 import * as D3 from '../../node_modules/d3-cloud/build/d3.layout.cloud.js';
@@ -27,9 +27,18 @@ export class SearchComponent{
   @ViewChild('cloudOverlay') private cloudOverlay;
   @ViewChild('svgen') private svgen;
   @ViewChild('alertbanner') private alertbanner;
+  @HostListener('window:scroll', ['$event'])
+    track(event) {
+        if (!this.loading && $(window).scrollTop() >= $(document).height()-$(window).height()-200){
+            this.loading = true;
+            this.result = this.result.concat(this.allResults.slice(this.result.length,this.result.length+80));
+            setTimeout(() => this.loading = false, 1000);
+        }
+    };
 
-
-  public result: Result[];
+  private loading:boolean;
+  public result:any[];
+  private allResults:any[];
   private words;
   private usedWords = '';
   private remainingWords = '';
@@ -63,12 +72,17 @@ export class SearchComponent{
           .attr("height", this.svgSize.height)
         .append("g")
           .attr("transform", "translate(" + this.svgSize.width / 2 + "," + this.svgSize.height / 2 + ")");
-
-    var loadingContent = false;
-    $(window).scroll(()=>{
-      if(!loadingContent && ($(window).scrollTop() > $(document).height-$(window).height() - 100)){
-          console.log('loading');
-      }
+    this.loading = false;
+    // var loadingContent = false;
+    // $(window).scroll(()=>{
+    //   console.log('Scrolling!');
+    //   if(!loadingContent && ($(window).scrollTop() > $(document).height-$(window).height() - 100)){
+    //       this.result = this.allResults.splice(0,160);
+    //       console.log(this.result.length);
+    //   }
+    // });
+    $(window).on("load",()=>{
+        console.log('loaded');
     });
   }
 
@@ -81,9 +95,9 @@ export class SearchComponent{
         this.initCloud();
         // this.usedWords = this.words.slice(0,9);
         // this.remainingWords = this.words.slice(10);
-        this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.result = searchRes,
+        this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.allResults = searchRes,
           error => console.log('error',error),
-          () => console.log(this.result)
+          () => this.result = this.allResults.slice(0,80)
         );
         if(this.words.length == 1 && machineLearning){
             this.alertbanner.nativeElement.style.height = "inherit";
@@ -172,10 +186,6 @@ export class SearchComponent{
   public closeAlert(){
     this.alertbanner.nativeElement.style.height = "0%";
     this.alertbanner.nativeElement.style.padding = "0px";
-  }
-
-  public onScroll(){
-    console.log('scroll');
   }
 
 }
