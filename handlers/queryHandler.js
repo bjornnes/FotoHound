@@ -23,17 +23,21 @@ function mapper(result){
      return {word: dd[0].replace(/[^a-z0-9\'\`\-\—\'æøå\u00DE-\u017F]/g,''), prob: dd[1]};//, orig: dd[0]};
 
   });
-  return res;
+  return res.filter(word => word.word != ''); //To remove the possibility of a hit only consisting of an unwanted character that would have been removed on line 23, which lead to crash when searching
 }
 
 function listLogic(words){
   var map = [];
+  //var words = wordss.filter
   for(i in words){
     temp = words[i].word;
     temp = temp.toString().trim();
     if(temp in map){
       var prob;
       prob = map[temp].prob + Number(words[i].prob);
+      if(isNaN(prob)){ //To counter the absurd problem that if temp equals the string find, line 36 will return true even if the array (map) is empty.
+        prob = Number(words[i].prob);
+      }
       words[i].prob = prob;
       delete map[temp];
       map[temp] = words[i];

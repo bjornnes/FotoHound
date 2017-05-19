@@ -8,7 +8,7 @@ if __name__ == '__main__':
 
 	logging.basicConfig(format='%(asctime)s : %(levelname)s : %(messages)s', level=logging.INFO)
 
-	model = fasttext.cbow('../../text8', 'text8-fasttext-cbow', dim=300)
+	model = fasttext.skipgram('../../text8', 'text8-fasttext-skipgram')
 	print(model.words)
 
 	sys.exit(main(sys.args))
