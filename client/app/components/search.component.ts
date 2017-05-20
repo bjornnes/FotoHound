@@ -27,6 +27,7 @@ export class SearchComponent{
   @ViewChild('cloudOverlay') private cloudOverlay;
   @ViewChild('svgen') private svgen;
   @ViewChild('alertbanner') private alertbanner;
+  @ViewChild('errorbanner') private errorbanner;
   @HostListener('window:scroll', ['$event'])
     track(event) {
         if (!this.loading && $(window).scrollTop() >= $(document).height()-$(window).height()-200){
@@ -90,18 +91,24 @@ export class SearchComponent{
     this.closeAlert();
     this.searchService.words(search, machineLearning, language).subscribe(
       wordRes => this.words = wordRes,
-      error => console.log('error', error),
+      error => {
+        this.errorbanner.nativeElement.style.height = "inherit";
+        this.errorbanner.nativeElement.style.padding = "12px";
+        console.log(this.errorbanner.nativeElement.children);
+        console.log(error);
+        this.errormessage = error._body;
+      },
       () => {
         this.initCloud();
         // this.usedWords = this.words.slice(0,9);
         // this.remainingWords = this.words.slice(10);
         this.searchService.search(JSON.stringify(this.words)).subscribe(searchRes => this.allResults = searchRes,
-          error => console.log('error',error),
+          error => console.log(error),
           () => this.result = this.allResults.slice(0,80)
         );
         if(this.words.length == 1 && machineLearning){
             this.alertbanner.nativeElement.style.height = "inherit";
-            this.alertbanner.nativeElement.style.padding = "20px";
+            this.alertbanner.nativeElement.style.padding = "12px";
         }
       }
   );
@@ -186,6 +193,8 @@ export class SearchComponent{
   public closeAlert(){
     this.alertbanner.nativeElement.style.height = "0%";
     this.alertbanner.nativeElement.style.padding = "0px";
+    this.errorbanner.nativeElement.style.height = "0%";
+    this.errorbanner.nativeElement.style.padding = "0px";
   }
 
 }

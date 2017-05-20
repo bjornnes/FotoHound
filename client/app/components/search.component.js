@@ -76,14 +76,20 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 SearchComponent.prototype.search = function (search, machineLearning, language) {
                     var _this = this;
                     this.closeAlert();
-                    this.searchService.words(search, machineLearning, language).subscribe(function (wordRes) { return _this.words = wordRes; }, function (error) { return console.log('error', error); }, function () {
+                    this.searchService.words(search, machineLearning, language).subscribe(function (wordRes) { return _this.words = wordRes; }, function (error) {
+                        _this.errorbanner.nativeElement.style.height = "inherit";
+                        _this.errorbanner.nativeElement.style.padding = "12px";
+                        console.log(_this.errorbanner.nativeElement.children);
+                        console.log(error);
+                        _this.errormessage = error._body;
+                    }, function () {
                         _this.initCloud();
                         // this.usedWords = this.words.slice(0,9);
                         // this.remainingWords = this.words.slice(10);
-                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.allResults = searchRes; }, function (error) { return console.log('error', error); }, function () { return _this.result = _this.allResults.slice(0, 80); });
+                        _this.searchService.search(JSON.stringify(_this.words)).subscribe(function (searchRes) { return _this.allResults = searchRes; }, function (error) { return console.log(error); }, function () { return _this.result = _this.allResults.slice(0, 80); });
                         if (_this.words.length == 1 && machineLearning) {
                             _this.alertbanner.nativeElement.style.height = "inherit";
-                            _this.alertbanner.nativeElement.style.padding = "20px";
+                            _this.alertbanner.nativeElement.style.padding = "12px";
                         }
                     });
                 };
@@ -156,6 +162,8 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 SearchComponent.prototype.closeAlert = function () {
                     this.alertbanner.nativeElement.style.height = "0%";
                     this.alertbanner.nativeElement.style.padding = "0px";
+                    this.errorbanner.nativeElement.style.height = "0%";
+                    this.errorbanner.nativeElement.style.padding = "0px";
                 };
                 return SearchComponent;
             }());
@@ -203,6 +211,10 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 core_1.ViewChild('alertbanner'),
                 __metadata("design:type", Object)
             ], SearchComponent.prototype, "alertbanner", void 0);
+            __decorate([
+                core_1.ViewChild('errorbanner'),
+                __metadata("design:type", Object)
+            ], SearchComponent.prototype, "errorbanner", void 0);
             __decorate([
                 core_1.HostListener('window:scroll', ['$event']),
                 __metadata("design:type", Function),

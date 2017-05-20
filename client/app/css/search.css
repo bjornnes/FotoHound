@@ -116,6 +116,29 @@ transition: 0.4s;
   top: 0;
 }
 
+#errorbanner a{
+  float: right;
+  color: #FFFFFF;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 20px;
+  position: relative;
+  right: 0;
+  top: 0;
+}
+
+#errorbanner {
+  height: 0%;
+  text-align: center;
+  background-color: #f7786b;
+  color: #FFFFFF;
+  padding: 0px;
+  font-size: 18px;
+  transition: 1.3s;
+
+}
+
 .search-area{
   margin-left: 25%;
   text-align: center;

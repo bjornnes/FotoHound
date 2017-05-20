@@ -4,6 +4,11 @@
   Could not find word in vocabulary. Searching only for {{searchQuery.value}} instead.</span>
 </div>
 
+<div #errorbanner class="overlay" id="errorbanner">
+  <span><a href="javascript:void(0)" (click)="closeAlert()" class="closebtn">&times;</a>
+  {{errormessage}}</span>
+</div>
+
 <div class="wordCloud" id="wCloud" #wCloud (click)=openCloudOverlay()>
   <canvas #wClouddd id="wClouddd" width="1" height="1" hidden="true">
   </canvas>
