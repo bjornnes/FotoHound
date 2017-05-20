@@ -34,12 +34,20 @@ router.get('/words', function(req, res, next){
   if(machineLearning == 'true'){
     //Send to ML-interface
     var lang = (language=='English')? 'eng' : 'nor';
-    relate.findRelatedWords(pos, neg, lang, function(result){
-      result[result.length]=searchWord; //Regular JSON array used to construct word cloud
-      //result[1][searchWord.word]=searchWord;  //Hashmap of words containing a JSON object used for search and sorting etc.
-      //console.log('2d',result[1]);
-      res.send(result);
-    });
+    try{
+      relate.findRelatedWords(pos, neg, lang, function(result){
+        if(typeof result !== 'undefined' && result){
+          result[result.length]=searchWord; //Regular JSON array used to construct word cloud
+          //result[1][searchWord.word]=searchWord;  //Hashmap of words containing a JSON object used for search and sorting etc.
+          //console.log('2d',result[1]);
+          res.send(result);
+        }else{
+          res.status(500).send('Could not reach machine learning service. Please try again later');
+        }
+      });
+    }catch(err){
+      console.log(err);
+    }
   }else{
     res.send([searchWord]);
   }

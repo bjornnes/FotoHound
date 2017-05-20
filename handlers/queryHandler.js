@@ -3,9 +3,16 @@ var socket = require('../service/clientSocket');
 function findRelatedWords(pos, neg, language, callback){
   if (language == 'nor'){
     socket.norwegianWord(pos, neg, function(result){
-      var res = mapper(result);
-      res = listLogic(res);
-      callback(res);
+      console.log(result);
+      if(typeof result !== 'undefined' && result){
+        console.log('Går inn her');
+        var res = mapper(result);
+        res = listLogic(res);
+        callback(res);
+      }else{
+        console.log('Går inn der');
+        callback();
+      }
     });
   }else if(language == 'eng'){
     socket.englishWord(pos, neg, function(result){

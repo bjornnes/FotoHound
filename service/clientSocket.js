@@ -1,7 +1,7 @@
 var zerorpc = require("zerorpc");
 
 var client = new zerorpc.Client();
-client.connect("tcp://158.38.43.76:4242");
+client.connect("tcp://158.38.43.76:424");
 
 function norwegianWord(pos, neg, callback){
 
