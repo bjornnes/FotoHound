@@ -1,4 +1,4 @@
-System.register(["angular2/core", "../services/search.service", "../../node_modules/d3-cloud/build/d3.layout.cloud.js", "../../node_modules/d3/build/d3.js", "../../bower_components/bootstrap/dist/js/bootstrap.js"], function (exports_1, context_1) {
+System.register(["angular2/core", "../services/search.service", "angular2/http", "../../node_modules/d3-cloud/build/d3.layout.cloud.js", "../../node_modules/d3/build/d3.js", "../../bower_components/bootstrap/dist/js/bootstrap.js"], function (exports_1, context_1) {
     "use strict";
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
         var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -10,7 +10,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
     var __moduleName = context_1 && context_1.id;
-    var core_1, search_service_1, D3, D33, SearchComponent;
+    var core_1, search_service_1, http_1, D3, D33, SearchComponent, SearchComponent_1;
     return {
         setters: [
             function (core_1_1) {
@@ -18,6 +18,9 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
             },
             function (search_service_1_1) {
                 search_service_1 = search_service_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             },
             function (D3_1) {
                 D3 = D3_1;
@@ -29,7 +32,7 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
             }
         ],
         execute: function () {
-            SearchComponent = (function () {
+            SearchComponent = SearchComponent_1 = (function () {
                 function SearchComponent(searchService, _element) {
                     this.searchService = searchService;
                     this._element = _element;
@@ -221,10 +224,12 @@ System.register(["angular2/core", "../services/search.service", "../../node_modu
                 __metadata("design:paramtypes", [Object]),
                 __metadata("design:returntype", void 0)
             ], SearchComponent.prototype, "track", null);
-            SearchComponent = __decorate([
+            SearchComponent = SearchComponent_1 = __decorate([
                 core_1.Component({
                     selector: 'search',
-                    templateUrl: 'app/html/search.html'
+                    templateUrl: 'app/html/search.html',
+                    directives: [SearchComponent_1],
+                    providers: [search_service_1.SearchService, http_1.HTTP_PROVIDERS]
                 }),
                 __metadata("design:paramtypes", [search_service_1.SearchService, core_1.ElementRef])
             ], SearchComponent);

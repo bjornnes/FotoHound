@@ -2,10 +2,9 @@
 import {Component, ElementRef, HostListener, ViewChild} from 'angular2/core';
 import {SearchService} from '../services/search.service';
 import {Observable} from 'rxjs/Observable';
+import {HTTP_PROVIDERS} from 'angular2/http';
 import * as D3 from '../../node_modules/d3-cloud/build/d3.layout.cloud.js';
 import * as D33 from '../../node_modules/d3/build/d3.js';
-//import Canvas from '../../node_modules/canvas/lib/canvas.js'
-import * as jQueryy from "../../bower_components/jquery/dist/jquery.js";
 import "../../bower_components/bootstrap/dist/js/bootstrap.js";
 
 declare let $ : any;
@@ -13,7 +12,9 @@ declare let $ : any;
 
 @Component({
   selector: 'search',
-  templateUrl: 'app/html/search.html'
+  templateUrl: 'app/html/search.html',
+  directives: [SearchComponent],
+  providers:[SearchService, HTTP_PROVIDERS]
 })
 export class SearchComponent{
   @ViewChild('wCloud.wordCloud') private div;
